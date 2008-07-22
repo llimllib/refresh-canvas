@@ -1,21 +1,47 @@
 <html>
  <head>
   <script type="application/x-javascript">
-function draw() {
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
 
-    ctx.arc(75,75,10,0,Math.PI*2,true); 
-    ctx.fill();
+var x = 75;
+var y = 75;
+var dx, dy = 0;
+var intervalID = 0;
+var canvas, ctx;
+
+function init() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
 }
+
+function startdraw() {
+    x = 75;
+    y = 75;
+    dx = parseInt(document.getElementById("dx").value);
+    dy = parseInt(document.getElementById("dy").value);
+    intervalID = setInterval(draw, 50);
+}
+
+function abort() {
+    clearInterval(intervalID);
+}
+
+function draw() {
+    ctx.clearRect(0,0,300,300);
+    ctx.arc(x,y,10,0,Math.PI*2,true); 
+    ctx.fill();
+    x += dx;
+    y += dy;
+}
+
   </script>
  </head>
- <body onload="draw()">
+ <body onload="init()">
    <canvas id="canvas" width="300" height="300"></canvas>
    <br>
    <form>
-     dx: <input type="text" id="dx" size="4"/>
-     dy: <input type="text" id="dy" size="4"/>
-     <input type="submit" onclick="draw(); return false;" value="draw">
+     dx: <input type="text" id="dx" size="4" value="1"/>
+     dy: <input type="text" id="dy" size="4" value="2"/>
+     <input type="submit" onclick="startdraw(); return false;" value="draw">
+     <input type="submit" onclick="abort(); return false;" value="abort">
  </body>
 </html>
