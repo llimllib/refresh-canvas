@@ -1,0 +1,16 @@
+<html>
+ <head>
+  <script type="application/x-javascript">
+function draw() {
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.arc(75,75,10,0,Math.PI*2,true); 
+    ctx.fill();
+}
+  </script>
+ </head>
+ <body onload="draw()">
+   <canvas id="canvas" width="300" height="300"></canvas>
+ </body>
+</html>
