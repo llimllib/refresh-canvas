@@ -1,0 +1,85 @@
+<html>
+ <head>
+  <script type="application/x-javascript">
+
+var x = 75;
+var y = 75;
+var WIDTH = 300;
+var HEIGHT = 300;
+var paddlex = 150;
+var paddledx = 2;
+var paddlewidth = 10;
+var dx, dy = 0;
+var intervalID = 0;
+var canvas, ctx;
+
+function init() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+}
+
+function startdraw() {
+    x = 75;
+    y = 75;
+    dx = parseFloat(document.getElementById("dx").value);
+    dy = parseFloat(document.getElementById("dy").value);
+    clearInterval(intervalID);
+    intervalID = setInterval(draw, 20);
+}
+
+function abort() {
+    clearInterval(intervalID);
+    ctx.clearRect(0,0,300,300);
+}
+
+function draw() {
+    ctx.save();
+    ctx.clearRect(0,0,300,300);
+    ctx.fillStyle = 'black';
+    ctx.arc(x,y,10,0,Math.PI*2,true); 
+    ctx.fill();
+
+    px = paddlex - paddlewidth / 2;
+    ctx.fillRect(px, HEIGHT, paddlewidth, -10);
+
+    x += dx;
+    y += dy;
+    if (x > WIDTH || x < 0) {
+        x -= 2*dx;
+        dx = -dx;
+    }
+    if (y > HEIGHT || y < 0) {
+        y -= 2*dy;
+        dy = -dy;
+    }
+    ctx.restore();
+}
+
+function movePaddle(dir) {
+    paddlex = dir * paddledx;
+}
+
+function doKeyDown(evt) {
+    //right is 39 left is 37
+    if (evt.keyCode == 39) {
+        movePaddle(1);
+    }
+    else if (evt.keyCode == 37) {
+        movePaddle(-1);
+    }
+}
+}
+
+window.addEventListener('keydown',doKeyDown,true)
+  </script>
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="300" height="300" style="border:1px solid;"></canvas>
+   <br>
+   <form>
+     dx: <input type="text" id="dx" size="4" value="1"/>
+     dy: <input type="text" id="dy" size="4" value="2"/>
+     <input type="submit" onclick="startdraw(); return false;" value="draw">
+     <input type="submit" onclick="abort(); return false;" value="abort">
+ </body>
+</html>
