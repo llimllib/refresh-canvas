@@ -6,12 +6,14 @@ var x = 75;
 var y = 75;
 var WIDTH = 300;
 var HEIGHT = 300;
-var paddlex = 150;
-var paddledx = 2;
-var paddlewidth = 10;
+var paddlex = WIDTH/2;
+var paddledx = WIDTH/75;
+var paddlewidth = WIDTH/4;
 var dx, dy = 0;
 var intervalID = 0;
 var canvas, ctx;
+var rightDown = false;
+var leftDown = false;
 
 function init() {
     canvas = document.getElementById("canvas");
@@ -33,15 +35,18 @@ function abort() {
 }
 
 function draw() {
-    ctx.save();
     ctx.clearRect(0,0,300,300);
+
+    //draw ball
     ctx.fillStyle = 'black';
+    ctx.beginPath();
     ctx.arc(x,y,10,0,Math.PI*2,true); 
     ctx.fill();
 
     px = paddlex - paddlewidth / 2;
-    ctx.fillRect(px, HEIGHT, paddlewidth, -10);
+    ctx.fillRect(px, HEIGHT-10, paddlewidth, HEIGHT);
 
+    //update x and y
     x += dx;
     y += dy;
     if (x > WIDTH || x < 0) {
@@ -52,24 +57,34 @@ function draw() {
         y -= 2*dy;
         dy = -dy;
     }
-    ctx.restore();
+
+    if (leftDown)
+        paddlex -= paddledx;
+    else if (rightDown)
+        paddlex += paddledx;
 }
 
-function movePaddle(dir) {
-    paddlex += dir * paddledx;
-}
-
-function doKeyPress(evt) {
+function doKeyDown(evt) {
     //right is 39 left is 37
     if (evt.keyCode == 39) {
-        movePaddle(1);
+        rightDown = true;
     }
     else if (evt.keyCode == 37) {
-        movePaddle(-1);
+        leftDown = true;
     }
 }
 
-window.addEventListener('keypress',doKeyPress,true)
+function doKeyUp(evt) {
+    if (evt.keyCode == 39) {
+        rightDown = false;
+    }
+    else if (evt.keyCode == 37) {
+        leftDown = false;
+    }
+}
+
+window.addEventListener('keydown',doKeyDown,true)
+window.addEventListener('keyup',doKeyUp,true)
   </script>
  </head>
  <body onload="init()">
@@ -77,7 +92,7 @@ window.addEventListener('keypress',doKeyPress,true)
    <br>
    <form>
      dx: <input type="text" id="dx" size="4" value="1"/>
-     dy: <input type="text" id="dy" size="4" value="2"/>
+     dy: <input type="text" id="dy" size="4" value="4"/>
      <input type="submit" onclick="startdraw(); return false;" value="draw">
      <input type="submit" onclick="abort(); return false;" value="abort">
  </body>
