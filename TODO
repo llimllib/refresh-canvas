@@ -1,4 +1,2 @@
-* Firefox still doesn't f*$*ing clearCanvas
-* move paddle with keyboard
-  * get paddle to draw
 * move paddle with mouse
+  * doesn't work with safari - why?
