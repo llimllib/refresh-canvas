@@ -28,14 +28,13 @@ function abort() {
 }
 
 function draw() {
-    ctx.save();
     ctx.clearRect(0,0,300,300);
     ctx.fillStyle = 'black';
+    ctx.beginPath();
     ctx.arc(x,y,10,0,Math.PI*2,true); 
     ctx.fill();
     x += dx;
     y += dy;
-    ctx.restore();
 }
 
   </script>
