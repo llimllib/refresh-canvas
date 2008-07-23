@@ -56,10 +56,10 @@ function draw() {
 }
 
 function movePaddle(dir) {
-    paddlex = dir * paddledx;
+    paddlex += dir * paddledx;
 }
 
-function doKeyDown(evt) {
+function doKeyPress(evt) {
     //right is 39 left is 37
     if (evt.keyCode == 39) {
         movePaddle(1);
@@ -68,9 +68,8 @@ function doKeyDown(evt) {
         movePaddle(-1);
     }
 }
-}
 
-window.addEventListener('keydown',doKeyDown,true)
+window.addEventListener('keypress',doKeyPress,true)
   </script>
  </head>
  <body onload="init()">
