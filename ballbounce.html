@@ -4,6 +4,8 @@
 
 var x = 75;
 var y = 75;
+var WIDTH = 300;
+var HEIGHT = 300;
 var dx, dy = 0;
 var intervalID = 0;
 var canvas, ctx;
@@ -35,6 +37,14 @@ function draw() {
     ctx.fill();
     x += dx;
     y += dy;
+    if (x > WIDTH || x < 0) {
+        x -= 2*dx;
+        dx = -dx;
+    }
+    if (y > HEIGHT || y < 0) {
+        y -= 2*dy;
+        dy = -dy;
+    }
     ctx.restore();
 }
 
