@@ -16,27 +16,31 @@ function init() {
 function startdraw() {
     x = 75;
     y = 75;
-    dx = parseInt(document.getElementById("dx").value);
-    dy = parseInt(document.getElementById("dy").value);
-    intervalID = setInterval(draw, 50);
+    dx = parseFloat(document.getElementById("dx").value);
+    dy = parseFloat(document.getElementById("dy").value);
+    intervalID = setInterval(draw, 20);
 }
 
 function abort() {
     clearInterval(intervalID);
+    ctx.clearRect(0,0,300,300);
 }
 
 function draw() {
+    ctx.save();
     ctx.clearRect(0,0,300,300);
+    ctx.fillStyle = 'black';
     ctx.arc(x,y,10,0,Math.PI*2,true); 
     ctx.fill();
     x += dx;
     y += dy;
+    ctx.restore();
 }
 
   </script>
  </head>
  <body onload="init()">
-   <canvas id="canvas" width="300" height="300"></canvas>
+   <canvas id="canvas" width="300" height="300" style="border:1px solid;"></canvas>
    <br>
    <form>
      dx: <input type="text" id="dx" size="4" value="1"/>
