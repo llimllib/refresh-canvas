@@ -53,9 +53,13 @@ function draw() {
         x -= 2*dx;
         dx = -dx;
     }
-    if (y > HEIGHT || y < 0) {
+    if ((y > HEIGHT && x > px && x < px + paddlewidth) || y < 0) {
         y -= 2*dy;
         dy = -dy;
+    }
+    else if (y > HEIGHT) {
+        //TODO: you lose!
+        clearInterval(intervalID);
     }
 
     if (leftDown)
