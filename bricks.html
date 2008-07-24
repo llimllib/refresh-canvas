@@ -3,10 +3,10 @@
   <script type="text/javascript" src="jquery-1.2.6.js"></script>
   <script type="application/x-javascript">
 
-var x = 75;
-var y = 75;
 var WIDTH = 300;
 var HEIGHT = 300;
+var x = WIDTH/2;
+var y = HEIGHT-10;
 var paddlex = WIDTH/2;
 var paddledx = WIDTH/75;
 var paddlewidth = WIDTH/4;
@@ -45,8 +45,8 @@ function initbricks() {
 }
 
 function startdraw() {
-    x = 75;
-    y = 75;
+    x = WIDTH/2;
+    y = HEIGHT-10;
     dx = parseFloat(document.getElementById("dx").value);
     dy = parseFloat(document.getElementById("dy").value);
     clearInterval(intervalID);
@@ -86,11 +86,11 @@ function draw() {
     y += dy;
 
     //have we hit a brick?
-    rowheight = BRICKHEIGHT + padding;
-    colwidth = BRICKWIDTH + padding;
+    rowheight = BRICKHEIGHT + PADDING;
+    colwidth = BRICKWIDTH + PADDING;
     row = Math.floor(y/rowheight)
     col = Math.floor(x/colwidth)
-    if (y < NROWS * rowheight && bricks[row][col] == 1) {
+    if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
         dy = -dy;
         bricks[row][col] = 0;
     }
@@ -150,7 +150,7 @@ window.addEventListener('mousemove',mousemove,false)
    <br>
    <form>
      dx: <input type="text" id="dx" size="4" value="1"/>
-     dy: <input type="text" id="dy" size="4" value="4"/>
+     dy: <input type="text" id="dy" size="4" value="-4"/>
      <input type="submit" onclick="startdraw(); return false;" value="start">
      <input type="submit" onclick="abort(); return false;" value="abort">
  </body>
