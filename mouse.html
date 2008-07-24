@@ -1,5 +1,6 @@
 <html>
  <head>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
   <script type="application/x-javascript">
 
 var x = 75;
@@ -21,9 +22,8 @@ var windowMaxX = 0;
 function init() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
-    rect = canvas.getBoundingClientRect();
-    windowMinX = rect.left;
-    windowMaxX = rect.right;
+    windowMinX = $("#canvas").offset().left;
+    windowMaxX = windowMinX + $("#canvas").width();
 }
 
 function startdraw() {
