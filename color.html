@@ -44,12 +44,12 @@ function init() {
 }
 
 function setColor(color) {
-    vars = ["backColor", "paddleColor", "ballColor", "row1", "row2", "row3", "row4", "row5"]
+    vars = ["backColor", "paddleColor", "ballColor", "row1", "row2", "row3", "row4", "row0"]
     for (v in vars) {
         id = vars[v];
         target = id.replace(/row(\d+)/, "rowColors[$1]")
+        console.log(target + " = '" + color + "';");
         if ($("#" + id).is(":checked")) {
-            console.log(target + " = '" + color + "';");
             eval(target + ' = "' + color + '";');
         }
     }
@@ -182,11 +182,11 @@ window.addEventListener('keyup',doKeyUp,false)
          <input type="radio" name="elt" id="backColor" value="back">Background<br>
          <input type="radio" name="elt" id="ballColor" value="ball">Ball<br>
          <input type="radio" name="elt" id="paddleColor" value="paddle">Paddle<br>
+         <input type="radio" name="elt" id="row0" value="row0">Row 0<br>
          <input type="radio" name="elt" id="row1" value="row1">Row 1<br>
          <input type="radio" name="elt" id="row2" value="row2">Row 2<br>
          <input type="radio" name="elt" id="row3" value="row3">Row 3<br>
          <input type="radio" name="elt" id="row4" value="row4">Row 4<br>
-         <input type="radio" name="elt" id="row5" value="row5">Row 5<br>
     </form>
      </td></tr></table>
  </body>
