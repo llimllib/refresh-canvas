@@ -140,9 +140,17 @@ function mousemove(evt) {
     }
 }
 
-window.addEventListener('keydown',doKeyDown,false)
-window.addEventListener('keyup',doKeyUp,false)
-window.addEventListener('mousemove',mousemove,false)
+function touchmove(evt) {
+    if (evt.touches.length==1) {
+        paddlex = evt.touches[0].pageX - windowMinX;
+    }
+}
+
+window.addEventListener('keydown',doKeyDown,false);
+window.addEventListener('keyup',doKeyUp,false);
+window.addEventListener('mousemove',mousemove,false);
+window.addEventListener('touchmove',touchmove,false);
+
   </script>
  </head>
  <body onload="init()">
