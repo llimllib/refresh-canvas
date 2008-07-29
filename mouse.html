@@ -24,13 +24,15 @@ function init() {
     ctx = canvas.getContext("2d");
     windowMinX = $("#canvas").offset().left;
     windowMaxX = windowMinX + $("#canvas").width();
+    x = 75;
+    y = 75;
+    dx = parseFloat($("#dx").val());
+    dy = parseFloat($("#dy").val());
+    draw();
 }
 
 function startdraw() {
-    x = 75;
-    y = 75;
-    dx = parseFloat(document.getElementById("dx").value);
-    dy = parseFloat(document.getElementById("dy").value);
+    init();
     clearInterval(intervalID);
     intervalID = setInterval(draw, 20);
 }
@@ -93,15 +95,15 @@ function doKeyUp(evt) {
     }
 }
 
-function mousemove(evt) {
+function mouseMove(evt) {
     if (evt.pageX > windowMinX && evt.pageX < windowMaxX) {
         paddlex = evt.pageX - windowMinX;
     }
 }
 
-window.addEventListener('keydown',doKeyDown,false)
-window.addEventListener('keyup',doKeyUp,false)
-window.addEventListener('mousemove',mousemove,false)
+$(document).keydown(doKeyDown);
+$(document).keyup(doKeyUp);
+$(document).mousemove(mouseMove);
   </script>
  </head>
  <body onload="init()">
@@ -111,6 +113,6 @@ window.addEventListener('mousemove',mousemove,false)
      dx: <input type="text" id="dx" size="4" value="1"/>
      dy: <input type="text" id="dy" size="4" value="4"/>
      <input type="submit" onclick="startdraw(); return false;" value="draw">
-     <input type="submit" onclick="abort(); return false;" value="abort">
+     <input type="submit" onclick="abort(); return false;" value="clear">
  </body>
 </html>
