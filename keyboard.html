@@ -1,0 +1,110 @@
+<html>
+ <head>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
+  <script type="application/x-javascript">
+
+var x = 75;
+var y = 75;
+var WIDTH = 300;
+var HEIGHT = 300;
+var paddlex = WIDTH/2;
+var paddledx = WIDTH/75;
+var paddlewidth = WIDTH/4;
+var dx, dy = 0;
+var intervalID = 0;
+var canvas, ctx;
+var rightDown = false;
+var leftDown = false;
+var mouser = "deleteme";
+var windowMinX = 0;
+var windowMaxX = 0;
+
+function init() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    windowMinX = $("#canvas").offset().left;
+    windowMaxX = windowMinX + $("#canvas").width();
+    x = 75;
+    y = 75;
+    dx = parseFloat($("#dx").val());
+    dy = parseFloat($("#dy").val());
+    draw();
+}
+
+function startdraw() {
+    init();
+    clearInterval(intervalID);
+    intervalID = setInterval(draw, 20);
+}
+
+function abort() {
+    clearInterval(intervalID);
+    ctx.clearRect(0,0,300,300);
+}
+
+function draw() {
+    ctx.clearRect(0,0,300,300);
+
+    //draw ball
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.arc(x,y,10,0,Math.PI*2,true); 
+    ctx.fill();
+
+    px = paddlex - paddlewidth / 2;
+    ctx.fillRect(px, HEIGHT-10, paddlewidth, HEIGHT);
+
+    //update x and y
+    x += dx;
+    y += dy;
+    if (x > WIDTH || x < 0) {
+        x -= 2*dx;
+        dx = -dx;
+    }
+    if ((y > HEIGHT && x > px && x < px + paddlewidth) || y < 0) {
+        y -= 2*dy;
+        dy = -dy;
+    }
+    else if (y > HEIGHT) {
+        //TODO: you lose!
+        clearInterval(intervalID);
+    }
+
+    if (leftDown)
+        paddlex -= paddledx;
+    else if (rightDown)
+        paddlex += paddledx;
+}
+
+function doKeyDown(evt) {
+    if (evt.keyCode == 39) {
+        rightDown = true;
+    }
+    else if (evt.keyCode == 37) {
+        leftDown = true;
+    }
+}
+
+function doKeyUp(evt) {
+    if (evt.keyCode == 39) {
+        rightDown = false;
+    }
+    else if (evt.keyCode == 37) {
+        leftDown = false;
+    }
+}
+
+$(document).keydown(doKeyDown);
+$(document).keyup(doKeyUp);
+  </script>
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="300" height="300" style="border:1px solid;"></canvas>
+   <br>
+   <form>
+     dx: <input type="text" id="dx" size="4" value="1"/>
+     dy: <input type="text" id="dy" size="4" value="4"/>
+     <input type="submit" onclick="startdraw(); return false;" value="draw">
+     <input type="submit" onclick="abort(); return false;" value="clear">
+ </body>
+</html>
