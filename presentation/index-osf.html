@@ -146,6 +146,21 @@ function draw() {
 
 <div class="slide">
 <h1>Bounce!</h1>
+<table><tr><td>
+<iframe src="../ballbounce.html" width=319 height=370 frameborder=0></iframe></td>
+<td>
+<pre>var WIDTH = 300;
+var HEIGHT = 300;
+
+function draw() {
+    //clear screen and draw ball
+
+    if (x &gt; WIDTH || x &lt; 0)
+        dx = -dx;
+
+    if (y &gt; HEIGHT || y &lt; 0)
+        dy = -dy;
+}</pre></td></table>
 </div>
 
 
