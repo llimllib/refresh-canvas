@@ -13,6 +13,8 @@ var canvas, ctx;
 function init() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    dx = parseFloat($("#dx").val());
+    dy = parseFloat($("#dy").val());
     x = 150;
     y = 150;
     draw();
@@ -20,8 +22,6 @@ function init() {
 
 function startdraw() {
     init();
-    dx = parseFloat($("#dx").val());
-    dy = parseFloat($("#dy").val());
     clearInterval(intervalID);
     intervalID = setInterval(draw, 20);
 }
