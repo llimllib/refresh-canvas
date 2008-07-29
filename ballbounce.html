@@ -1,5 +1,6 @@
 <html>
  <head>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
   <script type="application/x-javascript">
 
 var x = 75;
@@ -13,13 +14,15 @@ var canvas, ctx;
 function init() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    dx = parseFloat($("#dx").val());
+    dy = parseFloat($("#dy").val());
+    x = 150;
+    y = 150;
+    draw();
 }
 
 function startdraw() {
-    x = 75;
-    y = 75;
-    dx = parseFloat(document.getElementById("dx").value);
-    dy = parseFloat(document.getElementById("dy").value);
+    init();
     clearInterval(intervalID);
     intervalID = setInterval(draw, 20);
 }
@@ -27,6 +30,7 @@ function startdraw() {
 function abort() {
     clearInterval(intervalID);
     ctx.clearRect(0,0,300,300);
+    init();
 }
 
 function draw() {
@@ -57,6 +61,6 @@ function draw() {
      dx: <input type="text" id="dx" size="4" value="1"/>
      dy: <input type="text" id="dy" size="4" value="2"/>
      <input type="submit" onclick="startdraw(); return false;" value="draw">
-     <input type="submit" onclick="abort(); return false;" value="abort">
+     <input type="submit" onclick="abort(); return false;" value="clear">
  </body>
 </html>
