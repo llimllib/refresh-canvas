@@ -168,26 +168,42 @@ function draw() {
 
 
 <div class="slide">
-<h1>S5 Themes</h1>
-<p class="imgcon">
-<img src="pix/S501.jpg" alt="" title="Default" />
-<img src="pix/S502.jpg" alt="" title="I18N" />
-<img src="pix/S503.jpg" alt="" title="Blue" />
-<img src="pix/S504.jpg" alt="" title="Flower" />
-(one way of presenting multiple graphics)
-</p>
+<h1>The Keyboard Part 1</h1>
+<table><tr><td>
+<iframe src="../keyboard.html" width=319 height=370 frameborder=0></iframe></td>
+<td>
+<pre>function doKeyDown(evt) {
+    if (evt.keyCode == 39)
+        rightDown = true;
+    else if (evt.keyCode == 37)
+        leftDown = true;
+}
+
+function doKeyUp(evt) {
+    if (evt.keyCode == 39)
+        rightDown = false;
+    else if (evt.keyCode == 37)
+        leftDown = false;
+}
+
+$(document).keydown(doKeyDown);
+$(document).keyup(doKeyUp);</pre></td></table>
 </div>
 
 
 <div class="slide">
-<h1>Incremental S5 Themes</h1>
-<p class="imgcon">
-<img src="pix/S501.jpg" alt="" title="Default" class="incremental" />
-<img src="pix/S502.jpg" alt="" title="I18N" class="incremental" />
-<img src="pix/S503.jpg" alt="" title="Blue" class="incremental" />
-<img src="pix/S504.jpg" alt="" title="Flower" class="incremental" />
-(one by one!)
-</p>
+<h1>The Keyboard Part 2</h1>
+<table><tr><td>
+<iframe src="../keyboard.html" width=319 height=370 frameborder=0></iframe></td>
+<td>
+<pre>function draw() {
+    //draw the paddle and ball
+
+    if (leftDown)
+        paddlex -= paddledx;
+    else if (rightDown)
+        paddlex += paddledx;
+}</pre></td></table>
 </div>
 
 
