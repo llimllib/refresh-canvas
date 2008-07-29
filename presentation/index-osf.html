@@ -56,7 +56,17 @@ img#me05 {top: 43px;left: 36px;}
 <div class="slide">
 <h1>Why &lt;canvas&gt;?</h1>
 <ul>
-<li>Free (both as in beer and as in open)</li>
+<li>Free and Open</li>
+<li>It's not Flash</li>
+<li>DOM and Javascript</li>
+<li>Part of upcoming W3C <a href="http://www.w3.org/html/wg/html5/#the-canvas">HTML 5 Standard</a></li>
+<li>Heavyweight backers
+<ul>
+    <li>Yahoo (<a href="http://pipes.yahoo.com/pipes/">Pipes</a>)</li>
+    <li>Google (<a href="http://excanvas.sourceforge.net/">ExplorerCanvas</a>)</li>
+    <li>...and</li>
+</ul>
+</li>
 </ul>
 
 <div class="notes">
@@ -71,37 +81,26 @@ img#me05 {top: 43px;left: 36px;}
 
 
 <div class="slide">
-<h1>Operatic Origins</h1>
-<ul>
-<li>Opera 4 introduced <a href="http://www.opera.com/support/tutorials/operashow/" rel="external">Opera Show</a>, a projection-mode style sheet technology (link demonstrates external link styling and window spawning)</li>
-<li>Allows a single XHTML document to be turned into a PowerPoint-like slide show</li>
-<li>Adding screen and print style sheets allows for multi-medium views of a single document</li>
-<li>Highly efficient, but highly browser centric...</li>
-</ul>
+<h1>iPhone</h1>
+<img src="pix/iphone_home.gif">
 
 <div class="notes">
 <ul>
-<li>S5 and OperaShow diverged greatly in S5 1.1</li>
-<li>S5 1.2 should (we hope) bring them into harmony once more</li>
+<li>The iPhone doesn't have flash; instead it has canvas</li>
 </ul>
 </div>
 
 </div>
-
 
 <div class="slide">
-<h1>Incremental Display</h1>
-<ul class="incremental show-first">
-<li>Keep hitting/clicking "next" as long as it isn't the control link (&raquo;)</li>
-<li>Bullet points are revealed one by one
-<ul class="incremental">
-<li>All based on class name of <code>inc</code></li>
-<li>Lists can be classed to make items appear individually</li>
-<li>Individual items can be classed as well to create "animations"; see <a href="http://boxofchocolates.ca/projects/s5-incremental-graphics/" rel="external">Derek Featherstone's example</a></li>
-</ul>
-</li>
-<li>Let's try it again, but without the first bullet point being pre-highlighted...</li>
-</ul>
+<h1>Let's get started!</h1>
+<table><tr><td>
+<iframe src="../ball.html" width=319 height=325 frameborder=0></iframe></td>
+<td>
+<pre>ctx = document.getElementById("canvas")
+              .getContext("2d");
+ctx.arc(75,75,10,0,Math.PI*2,true); 
+ctx.fill();</pre></td></table>
 </div>
 
 
