@@ -122,25 +122,30 @@ ctx.fillRect(150, 290, 75, 10);
 <td>
 <pre>function startdraw() {
     init();
-    dx = parseFloat($("#dx").val());
-    dy = parseFloat($("#dy").val());
     intervalID = setInterval(draw, 20);
 }
 function draw() {
     ctx.clearRect(0,0,300,300);
 
-    //draw the ball
+    //draw the ball exactly as before
 
     x += dx;
     y += dy;
 }</pre></td></table>
+
+<div class="notes">
+<ul>
+<li>setInterval function sets draw() to run every 20 milliseconds</li>
+<li>clear the screen every time</li>
+<li>to move the ball, simply add our dx and dy values</li>
+<li>get somebody to provide dx and dy</li>
+</ul>
+</div>
+
 </div>
 
 <div class="slide">
-<h1>S5 Default File Structure</h1>
-<p style="text-align: center;">
-<img src="pix/s5filemap.png" alt="" title="At a Glance" />
-</p>
+<h1>Bounce!</h1>
 </div>
 
 
