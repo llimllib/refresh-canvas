@@ -155,6 +155,9 @@ var HEIGHT = 300;
 function draw() {
     //clear screen and draw ball
 
+    x += dx;
+    y += dy;
+
     if (x &gt; WIDTH || x &lt; 0)
         dx = -dx;
 
