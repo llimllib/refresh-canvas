@@ -16,14 +16,14 @@ var canvas, ctx;
 var rightDown = false;
 var leftDown = false;
 var mouser = "deleteme";
-var windowMinX = 0;
-var windowMaxX = 0;
+var canvasMinX = 0;
+var canvasMaxX = 0;
 
 function init() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
-    windowMinX = $("#canvas").offset().left;
-    windowMaxX = windowMinX + $("#canvas").width();
+    canvasMinX = $("#canvas").offset().left;
+    canvasMaxX = canvasMinX + $("#canvas").width();
     x = 75;
     y = 75;
     dx = parseFloat($("#dx").val());
@@ -97,8 +97,8 @@ function doKeyUp(evt) {
 }
 
 function mouseMove(evt) {
-    if (evt.pageX > windowMinX && evt.pageX < windowMaxX) {
-        paddlex = evt.pageX - windowMinX;
+    if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
+        paddlex = evt.pageX - canvasMinX;
     }
 }
 
