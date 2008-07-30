@@ -9,3 +9,7 @@
 * more slides in the presentation
 * practice
 * change all "abort"s to "clear"s
+* possibly too technical topics:
+    * talk about what push() and pop() mean?
+    * what paths mean?
+* figure out slide layout: want to valign=top both tds
