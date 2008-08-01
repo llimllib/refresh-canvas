@@ -1,9 +1,6 @@
-* read up on <canvas>'s history so I can talk knowledebly about it
-  * used in dashboard widgets?
-* let's get started should show a <canvas> HTML creation
-* what is it? slide needs to go before why use it?
+* timing
   * took me about 2:30 to do "why" and iPhone slide
-* goal slide in between why and "let's get started"
+  * took me about 10:00 to do other 8 slides
 * add some style
   * gradient demo (2 wheels. unnecessary?)
 * text
@@ -18,3 +15,4 @@
     * talk about what push() and pop() mean?
     * what paths mean?
 * figure out slide layout: want to valign=top both tds
+* rid of all tables and tds and trs

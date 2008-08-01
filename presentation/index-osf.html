@@ -52,6 +52,13 @@ img#me05 {top: 43px;left: 36px;}
 <div class="handout"></div>
 </div>
 
+<div class="slide">
+<h1>What is &lt;canvas&gt;?</h1>
+<ul>
+<li>An HTML element for displaying bitmapped graphics</li>
+<li>A competitor for Flash, Silverlight, and Java Applets</a>
+</ul>
+</div>
 
 <div class="slide">
 <h1>Why &lt;canvas&gt;?</h1>
@@ -69,14 +76,6 @@ img#me05 {top: 43px;left: 36px;}
 </li>
 </ul>
 
-<div class="notes">
-<ul>
-<li>I have notes here!</li>
-<li>Keen.</li>
-<li>Remember to tell people that notes are a new feature in 1.2</li>
-</ul>
-</div>
-
 </div>
 
 
@@ -93,45 +92,75 @@ img#me05 {top: 43px;left: 36px;}
 </div>
 
 <div class="slide">
+<h1>Breakout in 30 Minutes</h1>
+<div style="width: 400px; height:500px; text-align: left; float:left">
+    <img src="pix/breakout_cover.jpg" width=300 height=500/>
+</div>
+<div>
+    <ul>
+    <li>To get a feel for working with &lt;canvas&gt;, let's build something with it: a game!</li>
+    <li>We'll do a simple clone of the 80s game Breakout</li>
+    </ul>
+</div>
+
+<div class="notes">
+
+</div>
+
+</div>
+
+<div class="slide">
 <h1>Let's get started!</h1>
-<table><tr><td>
-<iframe src="../ball.html" width=319 height=325 frameborder=0></iframe></td>
-<td>
-<pre>ctx = document.getElementById("canvas")
+<div style="width: 319px; height=325px; float:left; margin-right: 15px;">
+    <iframe src="../ball.html" width=319 height=325 frameborder=0></iframe>
+</div>
+<div>
+<pre>&lt;canvas id="canvas" 
+    width="300" height="300" 
+    style="border:1px solid;"&gt;
+&lt;/canvas&gt;
+
+
+ctx = document.getElementById("canvas")
               .getContext("2d");
 ctx.arc(75,75,10,0,Math.PI*2,true); 
-ctx.fill();</pre></td></table>
+ctx.fill();</pre>
+</div>
 </div>
 
 
 <div class="slide">
 <h1>Don't be a Square</h1>
-<table><tr><td>
-<iframe src="../rectangle.html" width=319 height=325 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=325px; float:left; margin-right: 15px;">
+    <iframe src="../rectangle.html" width=319 height=325 frameborder=0></iframe>
+</div>
+<div>
 <pre>ctx.fillStyle = 'rgb(200, 10, 10)';
-ctx.fillRect(150, 290, 75, 10);
-</pre></td></table>
+ctx.fillRect(150, 290, 75, 10);</pre>
+</div>
 </div>
 
 
 <div class="slide">
-<h1>Motion of the Ocean</h1>
+<h1>Movin'</h1>
 <table><tr><td>
-<iframe src="../ballmove.html" width=319 height=370 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=370px; float:left; margin-right: 15px;">
+    <iframe src="../ballmove.html" width=319 height=370 frameborder=0></iframe>
+</div>
+<div>
 <pre>function startdraw() {
-    init();
-    intervalID = setInterval(draw, 20);
+  init();
+  intervalID = setInterval(draw, 20);
 }
 function draw() {
-    ctx.clearRect(0,0,300,300);
+  ctx.clearRect(0,0,300,300);
 
-    //draw the ball exactly as before
+  //draw the ball exactly as before
 
-    x += dx;
-    y += dy;
-}</pre></td></table>
+  x += dx;
+  y += dy;
+}
+</div>
 
 <div class="notes">
 <ul>
@@ -146,92 +175,93 @@ function draw() {
 
 <div class="slide">
 <h1>Bounce!</h1>
-<table><tr><td>
-<iframe src="../ballbounce.html" width=319 height=370 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=670px; float:left; margin-right: 15px; margin: auto;">
+    <iframe src="../ballbounce.html" width=319 height=570 frameborder=0></iframe>
+</div>
+<div>
 <pre>var WIDTH = 300;
 var HEIGHT = 300;
 
 function draw() {
-    //clear screen and draw ball
+  //clear screen and draw ball
 
-    x += dx;
-    y += dy;
+  x += dx;
+  y += dy;
 
-    if (x &gt; WIDTH || x &lt; 0)
-        dx = -dx;
+  if (x &gt; WIDTH || x &lt; 0)
+    dx = -dx;
 
-    if (y &gt; HEIGHT || y &lt; 0)
-        dy = -dy;
-}</pre></td></table>
+  if (y &gt; HEIGHT || y &lt; 0)
+    dy = -dy;
+}</pre>
+</div>
 </div>
 
 
 <div class="slide">
 <h1>The Keyboard Part 1</h1>
-<table><tr><td>
-<iframe src="../keyboard.html" width=319 height=370 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=570px; float:left; margin-right: 15px;">
+    <iframe src="../keyboard.html" width=319 height=570 frameborder=0></iframe>
+</div>
+<div>
 <pre>function doKeyDown(evt) {
-    if (evt.keyCode == 39)
-        rightDown = true;
-    else if (evt.keyCode == 37)
-        leftDown = true;
+  if (evt.keyCode == 39)
+    rightDown = true;
+  else if (evt.keyCode == 37)
+    leftDown = true;
 }
 
 function doKeyUp(evt) {
-    if (evt.keyCode == 39)
-        rightDown = false;
-    else if (evt.keyCode == 37)
-        leftDown = false;
+  if (evt.keyCode == 39)
+    rightDown = false;
+  else if (evt.keyCode == 37)
+    leftDown = false;
 }
 
 $(document).keydown(doKeyDown);
-$(document).keyup(doKeyUp);</pre></td></table>
+$(document).keyup(doKeyUp);</pre>
+</div>
 </div>
 
 
 <div class="slide">
 <h1>The Keyboard Part 2</h1>
-<table><tr><td>
-<iframe src="../keyboard.html" width=319 height=370 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=370px; float:left; margin-right: 15px;">
+    <iframe src="../keyboard.html" width=319 height=370 frameborder=0></iframe>
+</div>
+<div>
 <pre>function draw() {
-    //draw the paddle and ball
+  //draw the paddle and ball
 
-    if (leftDown)
-        paddlex -= paddledx;
-    else if (rightDown)
-        paddlex += paddledx;
-}</pre></td></table>
+  if (leftDown)
+    paddlex -= paddledx;
+  else if (rightDown)
+    paddlex += paddledx;
+}</pre>
+</div>
 </div>
 
 
 <div class="slide">
 <h1>I Hates Meeses to Pieces</h1>
-<table><tr><td>
-<iframe src="../mouse.html" width=319 height=570 frameborder=0></iframe></td>
-<td>
+<div style="width: 319px; height=370px; float:left; margin-right: 15px;">
+    <iframe src="../mouse.html" width=319 height=570 frameborder=0></iframe>
+</div>
+<div>
 <pre>function mouseMove(evt) {
-    if (evt.pageX &gt; canvasMinX 
-        &amp;&amp; evt.pageX &lt; canvasMaxX)
-        paddlex = evt.pageX - canvasMinX;
+
+  if (evt.pageX &gt; canvasMinX 
+  &amp;&amp;  evt.pageX &lt; canvasMaxX)
+
+    paddlex = evt.pageX - canvasMinX;
 }
 
-$(document).mousemove(mouseMove);</pre></td></table>
+$(document).mousemove(mouseMove);</pre>
+</div>
 </div>
 
 
-<div class="slide">
-<h1>In Summary</h1>
-<ul>
-<li>With minimal scripting, we have recreated and improved upon a (currently) browser-specific technology, making it cross-browser in the process</li>
-<li>The S5 format is OSF 1.0 compatible</li>
-<li>S5 is a very flexible and lightweight slide show system available for anyone to use</li>
-</ul>
-</div>
-
-</div>
+</div> <!-- main slide content div  DO NOT DELETEME-->
 
 </body>
 </html>
