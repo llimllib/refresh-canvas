@@ -8,11 +8,8 @@
 * images
   * import a background image?
 * better title
-* figure out iframes in the presentation
 * more slides in the presentation
 * practice
 * possibly too technical topics:
     * talk about what push() and pop() mean?
     * what paths mean?
-* figure out slide layout: want to valign=top both tds
-* rid of all tables and tds and trs
