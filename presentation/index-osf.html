@@ -67,6 +67,7 @@ img#me05 {top: 43px;left: 36px;}
 <li>Free and Open</li>
 <li>It's not Flash</li>
 <li>DOM and Javascript</li>
+<li>Can save bitmaps</li>
 <li>Part of upcoming W3C <a href="http://www.w3.org/html/wg/html5/#the-canvas">HTML 5 Standard</a></li>
 <li>Heavyweight backers
 <ul>
@@ -90,6 +91,17 @@ img#me05 {top: 43px;left: 36px;}
 </ul>
 </div>
 
+</div>
+
+
+<div class="slide">
+<h1>Why Not &lt;canvas&gt;?</h1>
+<ul><li>It's not flash</li>
+<li>No text or font capabilities
+  <ul><li>It's in the works</li></ul>
+</li>
+<li>Inconsistent/missing implementations</li>
+</ul>
 </div>
 
 <div class="slide">
@@ -257,7 +269,7 @@ $(document).keyup(doKeyUp);</pre>
   &amp;&amp;  evt.pageX &lt; canvasMaxX)
 
     paddlex = 
-      evt.pageX-canvasMinX;
+      evt.pageX - canvasMinX;
 }
 
 $(document).mousemove(mouseMove);</pre>
@@ -270,8 +282,8 @@ $(document).mousemove(mouseMove);</pre>
     <iframe src="../bricks.html" width=319 height=570 frameborder=0></iframe>
 </div>
 <div>
-<pre>for (i=0; i < NROWS; i++) {
-  for (j=0; j < NCOLS; j++) {
+<pre>for (i=0; i &lt; NROWS; i++) {
+  for (j=0; j &lt; NCOLS; j++) {
 
     if (bricks[i][j] == 1) {
 
@@ -284,6 +296,24 @@ $(document).mousemove(mouseMove);</pre>
   }
 }</pre>
 </div>
+</div>
+
+<div class="slide">
+<h1>And some color...</h1>
+<div style="width: 519px; height=370px; float:left; margin-right: 15px;">
+    <iframe src="../color.html" width=519 height=570 frameborder=0></iframe>
+</div>
+</div>
+
+<div class="slide">
+<h1>Some cool demos</h1>
+<ul><li><a href="http://www.deensoft.com/lab/protochart/piechart.php">charts and graphs</a></li>
+<li><a href="http://obsessing.org/">Processing.js</a></li>
+<li><a href="http://billmill.org/static/viewji/viewji.html">viewji</a></li>
+<li><a href="http://azarask.in/projects/algorithm-ink/#d3c3be13">Algorithm Ink</a></li>
+<li><a href="http://www.ernestdelgado.com/public-tests/canvasphoto/demo/canvas.html">Photo Table</a></li>
+<li><a href="http://www.unwieldy.net/moowheel/demo/large.html">Connections Visualizer</a></li>
+</ul>
 </div>
 
 </div> <!-- main slide content div  DO NOT DELETEME-->

@@ -38,7 +38,7 @@ div#footer {font-size: 0.5em; font-weight: bold; padding: 1em 0;}
 #footer h2 {font-style: italic;}
 
 div.long {font-size: 0.75em;}
-.slide h1 {position: absolute; top: 0.7em; left: 87px; z-index: 1;
+.slide h1 {position: absolute; top: 0.7em; left: 10px; z-index: 1;
   margin: 0; padding: 0.3em 0 0 50px; white-space: nowrap;
   font: bold 150%/1em Helvetica, sans-serif; /*text-transform: capitalize;*/
   color: #DDE; background: #005;}
