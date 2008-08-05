@@ -1,0 +1,178 @@
+<html>
+ <head>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
+  <script type="application/x-javascript">
+
+var WIDTH = 300;
+var HEIGHT = 300;
+var x = WIDTH/2;
+var y = HEIGHT-10;
+var paddlex = WIDTH/2;
+var paddledx = WIDTH/75;
+var paddlewidth = WIDTH/4;
+var dx = 1;
+var dy = -4;
+var intervalID = 0;
+var canvas, ctx;
+var rightDown = false;
+var leftDown = false;
+var mouser = "deleteme";
+var windowMinX = 0;
+var windowMaxX = 0;
+var NROWS = 5;
+var NCOLS = 5;
+var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKHEIGHT = 15;
+var PADDING = 1;
+var bricks;
+
+function init() {
+    x = WIDTH/2;
+    y = HEIGHT-20;
+    dx = 1;
+    dy = -4;
+    paddlex = WIDTH/2;
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    windowMinX = $("#canvas").offset().left;
+    windowMaxX = windowMinX + $("#canvas").width();
+    initbricks();
+    draw();
+}
+
+function initbricks() {
+    bricks = new Array(NROWS);
+    for (i=0; i < NROWS; i++) {
+        bricks[i] = new Array(NCOLS);
+        for (j=0; j < NCOLS; j++) {
+            bricks[i][j] = 1;
+        }
+    }
+}
+
+function startdraw() {
+    x = WIDTH/2;
+    y = HEIGHT-10;
+    clearInterval(intervalID);
+    intervalID = setInterval(draw, 20);
+    initbricks();
+}
+
+function abort() {
+    clearInterval(intervalID);
+    init();
+}
+
+function draw() {
+    ctx.clearRect(0,0,300,300);
+
+    //draw ball
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.arc(x,y,10,0,Math.PI*2,true); 
+    ctx.fill();
+
+    px = paddlex - paddlewidth / 2;
+    ctx.fillRect(px, HEIGHT-10, paddlewidth, HEIGHT);
+
+    //draw bricks
+    for (i=0; i < NROWS; i++) {
+        for (j=0; j < NCOLS; j++) {
+            if (bricks[i][j] == 1) {
+                ctx.fillRect((j * (BRICKWIDTH + PADDING)) + PADDING, 
+                             (i * (BRICKHEIGHT + PADDING)) + PADDING,
+                             BRICKWIDTH, BRICKHEIGHT);
+            }
+        }
+    }
+
+    //update x and y
+    x += dx;
+    y += dy;
+
+    //have we hit a brick?
+    rowheight = BRICKHEIGHT + PADDING;
+    colwidth = BRICKWIDTH + PADDING;
+    row = Math.floor(y/rowheight)
+    col = Math.floor(x/colwidth)
+    if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
+        dy = -dy;
+        bricks[row][col] = 0;
+    }
+
+    //have we hit a wall
+    if (x > WIDTH || x < 0) {
+        x -= 2*dx;
+        dx = -dx;
+    }
+    //have we hit a paddle
+    if (y + 10 > HEIGHT && x > px && x < px + paddlewidth) {
+      dx = 8 * ((x-(px+paddlewidth/2))/paddlewidth);
+      console.log(x.toString() +"|"+ px.toString())
+      y -= 2*dy;
+      dy = -dy;
+    }
+    //or the ceiling
+    else if (y < 0) {
+        y -= 2*dy;
+        dy = -dy;
+    }
+    else if (y > HEIGHT) {
+        //TODO: you lose!
+        clearInterval(intervalID);
+    }
+
+    if (leftDown)
+        paddlex -= paddledx;
+    else if (rightDown)
+        paddlex += paddledx;
+}
+
+function doKeyDown(evt) {
+    //right is 39 left is 37
+    if (evt.keyCode == 39) {
+        rightDown = true;
+    }
+    else if (evt.keyCode == 37) {
+        leftDown = true;
+    }
+}
+
+function doKeyUp(evt) {
+    if (evt.keyCode == 39) {
+        rightDown = false;
+    }
+    else if (evt.keyCode == 37) {
+        leftDown = false;
+    }
+}
+
+function mousemove(evt) {
+    minX = evt.pageX - (paddlewidth/2);
+    maxX = evt.pageX + (paddlewidth/2);
+    if (minX > windowMinX && maxX < windowMaxX) {
+        paddlex = evt.pageX - windowMinX;
+    }
+}
+
+function touchmove(evt) {
+    if (evt.touches.length==1) {
+        paddlex = evt.touches[0].pageX - windowMinX;
+    }
+}
+
+window.addEventListener('keydown',doKeyDown,false);
+window.addEventListener('keyup',doKeyUp,false);
+window.addEventListener('mousemove',mousemove,false);
+window.addEventListener('touchmove',touchmove,false);
+
+  </script>
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="300" height="300" style="border:1px solid;"></canvas>
+   <br>
+   <form>
+     <input type="submit" onclick="startdraw(); return false;" value="start">
+     <input type="submit" onclick="abort(); return false;" value="clear">
+ </body>
+</html>
