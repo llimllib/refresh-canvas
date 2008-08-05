@@ -20,7 +20,8 @@
 <link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
 <!-- embedded styles -->
 <style type="text/css" media="all">
-.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+/*.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}*/
+.imgcon {display:block; margin: 0 auto; padding: 0; text-align: center;}
 #anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
 #anim img {position: absolute; top: 42px; left: 24px;}
 img#me01 {top: 0; left: 0;}
@@ -81,7 +82,7 @@ img#me05 {top: 43px;left: 36px;}
 
 <div class="slide">
 <h1>iPhone</h1>
-<img src="pix/iphone_home.gif">
+<img class="imgcon" src="pix/iphone_home.gif">
 
 <div class="notes">
 <ul>
@@ -121,8 +122,8 @@ img#me05 {top: 43px;left: 36px;}
 &lt;/canvas&gt;
 
 
-ctx = document.getElementById("canvas")
-              .getContext("2d");
+ctx = $("#canvas")
+      .getContext("2d");
 ctx.arc(75,75,10,0,Math.PI*2,true); 
 ctx.fill();</pre>
 </div>
@@ -135,7 +136,7 @@ ctx.fill();</pre>
     <iframe src="../rectangle.html" width=319 height=325 frameborder=0></iframe>
 </div>
 <div>
-<pre>ctx.fillStyle = 'rgb(200, 10, 10)';
+<pre>ctx.fillStyle = 'rgb(200,10,10)';
 ctx.fillRect(150, 290, 75, 10);</pre>
 </div>
 </div>
@@ -143,18 +144,21 @@ ctx.fillRect(150, 290, 75, 10);</pre>
 
 <div class="slide">
 <h1>Movin'</h1>
-<div style="width: 319px; height=370px; float:left; margin-right: 15px;">
-    <iframe src="../ballmove.html" width=319 height=370 frameborder=0></iframe>
+<div style="width: 319px; height=570px; float:left; margin-right: 15px;">
+    <iframe src="../ballmove.html" width=319 height=570 frameborder=0></iframe>
 </div>
 <div>
 <pre>function startdraw() {
   init();
-  intervalID = setInterval(draw, 20);
+  intervalID = 
+    setInterval(draw, 20);
 }
+
 function draw() {
   ctx.clearRect(0,0,300,300);
 
-  //draw the ball exactly as before
+  //draw the ball 
+  //exactly as before
 
   x += dx;
   y += dy;
@@ -252,13 +256,35 @@ $(document).keyup(doKeyUp);</pre>
   if (evt.pageX &gt; canvasMinX 
   &amp;&amp;  evt.pageX &lt; canvasMaxX)
 
-    paddlex = evt.pageX - canvasMinX;
+    paddlex = 
+      evt.pageX-canvasMinX;
 }
 
 $(document).mousemove(mouseMove);</pre>
 </div>
 </div>
 
+<div class="slide">
+<h1>Add Some Bricks</h1>
+<div style="width: 319px; height=370px; float:left; margin-right: 15px;">
+    <iframe src="../bricks.html" width=319 height=570 frameborder=0></iframe>
+</div>
+<div>
+<pre>for (i=0; i < NROWS; i++) {
+  for (j=0; j < NCOLS; j++) {
+
+    if (bricks[i][j] == 1) {
+
+      ctx.fillRect(
+        j * BRICKWIDTH,
+        i * BRICKHEIGHT,
+        BRICKWIDTH,
+        BRICKHEIGHT);
+    }
+  }
+}</pre>
+</div>
+</div>
 
 </div> <!-- main slide content div  DO NOT DELETEME-->
 
