@@ -122,11 +122,18 @@ function draw() {
     //have we hit a brick?
     rowheight = BRICKHEIGHT + PADDING;
     colwidth = BRICKWIDTH + PADDING;
-    row = Math.floor(y/rowheight)
-    col = Math.floor(x/colwidth)
-    if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
+    row = Math.floor((y-5)/rowheight)
+    mincol = Math.floor((x-5)/colwidth)
+    maxcol = Math.floor((x+5)/colwidth)
+    if (y - 5 < NROWS * rowheight && row >= 0) {
+      if (mincol >= 0 && bricks[row][mincol] == 1) {
         dy = -dy;
-        bricks[row][col] = 0;
+        bricks[row][mincol] = 0;
+      }
+      else if (maxcol >= 0 && bricks[row][maxcol] == 1) {
+        dy = -dy;
+        bricks[row][maxcol] = 0;
+      }
     }
 
     //have we hit a wall
