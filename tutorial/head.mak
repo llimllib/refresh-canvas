@@ -13,10 +13,37 @@ div#explain { font:  14px;
 }
 a#next { /*TODO get right aligned*/ }
   </style>
+  <script type="text/javascript" src="jquery-1.2.6.js"></script>
+  <script type="text/javascript" src="codemirror/codemirror.js"></script>
   <title>Canvas Tutorial</title>
   <script type="application/x-javascript">
-${script}
+var editor = undefined;
+
+function runCode() {
+    eval(editor.getCode());
+}
+
+$(document).ready(function(){
+
+editor = CodeMirror.fromTextArea("code", {
+  parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+  path: "codemirror/",
+  stylesheet: "codemirror/jscolors.css",
+  width: "400px",
+});
+
+});
   </script>
  </head>
  <body>
+   <h2>Breakout Tutorial</h2>
+
+   <canvas id="canvas" width="300" height="300"></canvas>
+
+</%def>
+
+<%def name="next(f)">
+   <a id="next" href="${f}">next &gt;&gt;</a>
+ </body>
+</html>
 </%def>

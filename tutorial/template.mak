@@ -1,8 +1,5 @@
 <%namespace name="head" file="head.mak" />
 ${head.head()}
-   <h2>Breakout Tutorial</h2>
-
-   <canvas id="canvas" width="300" height="300"></canvas>
 
    <div id="explain">What we're going to do in this tutorial is use the new 
    &lt;canvas&gt; element to create a simplified clone of the old Atari game
@@ -10,9 +7,7 @@ ${head.head()}
    The first thing we need to do is create an instance of the &lt;canvas&gt; element so that
    we can start to draw on it. If you look in the source for this page, you'll see a 
    declaration that looks like this:<br />
-   <pre>&lt;canvas id="canvas" width="300" height="300" style="border:1px solid;"&gt;&lt;/canvas&gt;</pre>
+   <pre>&lt;canvas id="canvas" width="300" height="300"&gt;&lt;/canvas&gt;</pre>
    This declaration creates the canvas on which we'll draw in the rest of the tutorial.</div>
 
-   <a id="next" href="ball.html">next &gt;&gt;</a>
- </body>
-</html>
+${head.next("ball.html")}
