@@ -20,6 +20,7 @@ a#next { /*TODO get right aligned*/ }
 var editor = undefined;
 
 function runCode() {
+    //TODO: handle exceptions somehow
     eval(editor.getCode());
 }
 
@@ -29,7 +30,8 @@ editor = CodeMirror.fromTextArea("code", {
   parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
   path: "codemirror/",
   stylesheet: "codemirror/jscolors.css",
-  width: "400px",
+  width: "100%",
+  height: "200px",
 });
 
 });
