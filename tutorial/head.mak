@@ -2,7 +2,7 @@
 <html>
  <head>
   <style type="text/css">
-#canvas { border: 1px solid;
+#canvas { border: 1px solid DarkGray;
 		  width:        300px;
 		  height:       300px;
 		  float:        left;
@@ -12,6 +12,9 @@ div#explain { font:  14px;
               width: 800px;
 }
 a#next { /*TODO get right aligned*/ }
+
+#codebox {border: 1px solid LightGray;
+          margin-left:320px}
   </style>
   <script type="text/javascript" src="jquery-1.2.6.js"></script>
   <script type="text/javascript" src="codemirror/codemirror.js"></script>
@@ -21,6 +24,10 @@ var editor = undefined;
 
 function runCode() {
     //TODO: handle exceptions somehow
+    ctx = $("#canvas")[0].getContext("2d")
+    ctx.clearRect(0,0,
+                  $("#canvas")[0].width,
+                  $("#canvas")[0].height);
     eval(editor.getCode());
 }
 
