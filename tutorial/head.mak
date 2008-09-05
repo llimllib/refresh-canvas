@@ -2,19 +2,29 @@
 <html>
  <head>
   <style type="text/css">
-#canvas { border: 1px solid DarkGray;
-		  width:        300px;
-		  height:       300px;
-		  float:        left;
-		  margin-right: 15px;
+body, html {margin:0;
+            padding:0;
+            background:white;
+            color:#000;
 }
-div#explain { font:  14px;
-              width: 800px;
+body { min-width: 750px; }
+#wrap { margin:0 auto; width:100%; }
+#canvascontainer { margin-left: 5px;
+                   width: 320px;
+                   float: left;
 }
-a#next { /*TODO get right aligned*/ }
-
+<%
+    codebox_width = 400
+    codebox_height = 200
+%>
 #codebox {border: 1px solid LightGray;
-          margin-left:320px}
+          width:${codebox_width+4}px;
+          height:${codebox_height}px;
+}
+#textcontainer {font: 14px; margin-left: 320px;}
+#footer {clear:both;}
+
+#canvas { border: 1px solid DarkGray; }
   </style>
   <script type="text/javascript" src="jquery-1.2.6.js"></script>
   <script type="text/javascript" src="codemirror/codemirror.js"></script>
@@ -37,7 +47,7 @@ editor = CodeMirror.fromTextArea("code", {
   parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
   path: "codemirror/",
   stylesheet: "codemirror/jscolors.css",
-  width: "100%",
+  width: "${codebox_width}px",
   height: "200px",
 });
 
@@ -45,14 +55,23 @@ editor = CodeMirror.fromTextArea("code", {
   </script>
  </head>
  <body>
+ <div id="wrap">
+    <div id="header">
    <h2>Breakout Tutorial</h2>
+    </div>
 
-   <canvas id="canvas" width="300" height="300"></canvas>
+   <div id="canvascontainer">
+       <canvas id="canvas" width="300" height="300"></canvas>
+   </div>
+   <div id="textcontainer">
 
 </%def>
 
 <%def name="next(f)">
-   <a id="next" href="${f}">next &gt;&gt;</a>
+    <div id="footer">
+       <a href="${f}">next &gt;&gt;</a>
+    </div>
+    </div>
  </body>
 </html>
 </%def>
