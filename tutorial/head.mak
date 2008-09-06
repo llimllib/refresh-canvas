@@ -19,8 +19,12 @@ body { min-width: 750px; }
 #codebox {border: 1px solid LightGray;
           width:${codebox_width+4}px;
           height:${codebox_height}px;
+          margin-top: 10px;
 }
-#textcontainer {font: 14px; margin-left: 320px;}
+#textcontainer {font: 14px;
+    margin-left: 320px;
+    margin-right: 10px;
+}
 #footer {clear:both;}
 
 #canvas { border: 1px solid DarkGray; }
