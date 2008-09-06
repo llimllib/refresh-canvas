@@ -30,14 +30,16 @@ body { min-width: 750px; }
   <title>Canvas Tutorial</title>
   <script type="application/x-javascript">
 var editor = undefined;
+var intervalID = undefined;
 
 function runCode() {
+	if (intervalID != undefined)
+	    clearInterval(intervalID);
     //TODO: handle exceptions somehow
-    ctx = $("#canvas")[0].getContext("2d")
-    ctx.clearRect(0,0,
-                  $("#canvas")[0].width,
-                  $("#canvas")[0].height);
-    eval(editor.getCode());
+    $("#canvas")[0].getContext("2d").clearRect(0,0,
+	  $("#canvas")[0].width,
+	  $("#canvas")[0].height);
+    intervalID = eval(editor.getCode());
 }
 
 $(document).ready(function(){
