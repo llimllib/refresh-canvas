@@ -21,4 +21,6 @@ ctx.fill();</textarea></div>
 		for <code>fill()</code>.
     </div>
 	
-${head.next('square.html')}
+	<!-- TODO: have a side page to talk about why you need the beginPath() and
+	closePath() -->
+${head.next('move.html')}
