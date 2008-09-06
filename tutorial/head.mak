@@ -1,4 +1,4 @@
-<%def name="head(script='')">
+<%def name="head(codebox_height=200)">
 <html>
  <head>
   <style type="text/css">
@@ -15,7 +15,6 @@ body { min-width: 750px; }
 }
 <%
     codebox_width = 400
-    codebox_height = 200
 %>
 #codebox {border: 1px solid LightGray;
           width:${codebox_width+4}px;
@@ -48,7 +47,7 @@ editor = CodeMirror.fromTextArea("code", {
   path: "codemirror/",
   stylesheet: "codemirror/jscolors.css",
   width: "${codebox_width}px",
-  height: "200px",
+  height: "${codebox_height}px",
 });
 
 });
