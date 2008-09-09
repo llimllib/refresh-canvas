@@ -3,7 +3,7 @@ ${head.head(340)}
 	<div id="explain">Now that we've got a ball, let's make it move.
 	   In order to do so, we'll create a <code>draw()</code> function
 	   which wipes the screen, draws the ball, then updates its current
-	   position. Then we'll use a call to 
+	   position. We'll use a call to 
 	   <code>setInterval(function, timeout)</code> in the <code>init()</code>
 	   function to tell the browser to run our draw function every 10
 	   milliseconds, creating the illusion of movement.
@@ -37,4 +37,4 @@ init();</textarea>
         or change the x and y variables to change where the ball will start.
 	</div>
 
-${head.next('square.html')}
+${head.next('paddle.html')}
