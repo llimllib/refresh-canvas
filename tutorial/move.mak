@@ -38,4 +38,4 @@ init();</textarea>
 		Make sure to try negative values for dx and dy.
 	</div>
 
-${head.next('paddle.html')}
+${head.next('bounce.html')}
