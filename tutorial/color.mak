@@ -28,3 +28,4 @@ ctx.closePath();
 ctx.fill();</textarea></div>
 			<input type="submit" value="run code" onclick="runCode()"/><br>
     </div>
+${head.next('move.html')}
