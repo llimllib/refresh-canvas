@@ -7,11 +7,6 @@ ${head.head(340)}
 	   <code>setInterval(function, timeout)</code> in the <code>init()</code>
 	   function to tell the browser to run our draw function every 10
 	   milliseconds, creating the illusion of movement.
-        <!-- TODO: provide a link for what setInterval(...) is
-             TODO: need an intro page explaining how the tut works
-             XXX:  would sidebars underneath the canvas (in light yellow, maybe?)
-                    be a good way to introduce such things?
-        -->
 	   <div id="codebox">
        <textarea id="code" rows=10 cols=50>var x = 150;
 var y = 150;

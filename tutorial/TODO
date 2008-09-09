@@ -1,3 +1,7 @@
 * have a side page to talk about why you need the beginPath() and closePath()
 * explain why/that we're using jQuery
 * talk about functions? set up a basic library?
+* provide a link for what setInterval(...) is
+* need an intro page explaining how the tut works
+    *  would sidebars underneath the canvas (in light yellow, maybe?)
+       be a good way to introduce such things?
