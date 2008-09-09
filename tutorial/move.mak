@@ -35,6 +35,7 @@ init();</textarea>
 		<p>
         Try changing the dx and dy values to change the direction of the ball,
         or change the x and y variables to change where the ball will start.
+		Make sure to try negative values for dx and dy.
 	</div>
 
 ${head.next('paddle.html')}
