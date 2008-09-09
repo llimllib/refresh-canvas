@@ -20,7 +20,4 @@ ctx.fill();</textarea></div>
 		sample call above. You may also try substituting <code>stroke()</code>
 		for <code>fill()</code>.
     </div>
-	
-	<!-- TODO: have a side page to talk about why you need the beginPath() and
-	closePath() -->
-${head.next('move.html')}
+${head.next('color.html')}
