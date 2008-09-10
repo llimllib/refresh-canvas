@@ -1,5 +1,5 @@
 <%namespace name="head" file="head.mak" />
-${head.head(350)}
+${head.head(390)}
 	   <textarea id="library" style="display: none">
 var x = 150;
 var y = 150;
@@ -54,6 +54,7 @@ function draw() {
         && x > paddlex
         && x < paddlex + paddlew)
     dy = -dy;
+  //else game over, you lose
  
   x += dx;
   y += dy;
