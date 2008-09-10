@@ -10,6 +10,7 @@ body, html {margin:0;
 body { min-width: 750px; }
 #wrap { margin:0 auto; width:100%; }
 #canvascontainer { margin-left: 5px;
+				   margin-top: 5px;
                    width: 320px;
                    float: left;
 }
@@ -63,9 +64,9 @@ editor = CodeMirror.fromTextArea("code", {
  </head>
  <body>
  <div id="wrap">
-    <div id="header">
+   <!-- <div id="header">
    <h2>Breakout Tutorial</h2>
-    </div>
+    </div>-->
 
    <div id="canvascontainer">
        <canvas id="canvas" width="300" height="300"></canvas>

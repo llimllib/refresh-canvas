@@ -13,3 +13,5 @@
 * make slide titles
 * add a "show library" button
 * add an abort() button (or not?)
+* where should the draw() button be? top or bottom? keyboard shortcut?
+* should the canvas follow the user's scrolling? (like Meier's home page)
