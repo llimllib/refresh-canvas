@@ -63,8 +63,11 @@ init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
-    Note that the constants paddlex, paddleh, and paddlew will be in the library
-    on the next page.
+    You probably want to be able to move the paddle - we'll cover that in
+    the next page.
+    <p>
+    The constants paddlex, paddleh, and paddlew will be hidden in the library
+    from now on.
 	</div>
 
 ${head.next('keyboard.html')}
