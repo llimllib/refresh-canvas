@@ -2,11 +2,13 @@
 * explain why/that we're using jQuery
 * talk about functions? set up a basic library?
 * provide a link for what setInterval(...) is
+  * I should liberally scatter links about topics I introduce but don't
+    explain
 * need an intro page explaining how the tut works
-    * would sidebars underneath the canvas (in light yellow, maybe?)
-      be a good way to introduce such things?
-    * need to explain that basic familiarity with programming/javascript
-      are assumed
+  * would sidebars underneath the canvas (in light yellow, maybe?)
+    be a good way to introduce such things?
+  * need to explain that basic familiarity with programming/javascript
+    are assumed
 * when/ever to talk about the stack nature of canvas?
 * style the header and footer
 * change all code to 2-space tabs (or change indenter to 4-space tabs?)
