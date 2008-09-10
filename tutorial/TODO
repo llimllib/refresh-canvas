@@ -3,11 +3,13 @@
 * talk about functions? set up a basic library?
 * provide a link for what setInterval(...) is
 * need an intro page explaining how the tut works
-    *  would sidebars underneath the canvas (in light yellow, maybe?)
-       be a good way to introduce such things?
+    * would sidebars underneath the canvas (in light yellow, maybe?)
+      be a good way to introduce such things?
+    * need to explain that basic familiarity with programming/javascript
+      are assumed
 * when/ever to talk about the stack nature of canvas?
 * style the header and footer
 * change all code to 2-space tabs (or change indenter to 4-space tabs?)
 * make slide titles
 * add a "show library" button
-* add an abort() button
+* add an abort() button (or not?)

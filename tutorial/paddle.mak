@@ -1,5 +1,5 @@
 <%namespace name="head" file="head.mak" />
-${head.head(190)}
+${head.head(350)}
 	   <textarea id="library" style="display: none">
 var x = 150;
 var y = 150;
@@ -33,21 +33,27 @@ function init() {
 }
        </textarea>
 	<div id="explain">Now we can start to think about making our game
-  a bit like an actual game. Let's add a paddle.
+  a bit like an actual game. Let's add a paddle, and only allow the
+  ball to bounce off the bottom when it hits it.
   <div id="codebox">
        <textarea id="code" rows=10 cols=50>paddlex = WIDTH / 2;
-paddle_height = 10;
-paddle_width = 75;
+paddleh = 10;
+paddlew = 75;
 
 function draw() {
   clear();
   circle(x, y, 10);
-  rect(paddlex, HEIGHT - paddle_height, paddle_width, paddle_height);
+  rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
  
   if (x + dx > WIDTH || x + dx < 0)
 	  dx = -dx;
-  if (y + dy > HEIGHT || y + dy < 0)
+
+  if (y + dy < 0)
 	  dy = -dy;
+  else if (y + dy > HEIGHT
+        && x > paddlex
+        && x < paddlex + paddlew)
+    dy = -dy;
  
   x += dx;
   y += dy;
@@ -57,8 +63,8 @@ init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
-        Try to change the draw() function so that the ball accelerates or decelerates
-        every time it hits a wall.
+    Note that the constants paddlex, paddleh, and paddlew will be in the library
+    on the next page.
 	</div>
 
-${head.next('paddle.html')}
+${head.next('keyboard.html')}

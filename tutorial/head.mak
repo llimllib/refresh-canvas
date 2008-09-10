@@ -14,7 +14,7 @@ body { min-width: 750px; }
                    float: left;
 }
 <%
-    codebox_width = 400
+    codebox_width = 450
 %>
 #codebox {border: 1px solid LightGray;
           width:${codebox_width+4}px;
