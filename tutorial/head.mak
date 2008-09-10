@@ -43,6 +43,8 @@ function runCode() {
     $("#canvas")[0].getContext("2d").clearRect(0,0,
 	  $("#canvas")[0].width,
 	  $("#canvas")[0].height);
+	//if there's a library defined, eval it
+	eval($("#library").val());
     intervalID = eval(editor.getCode());
 }
 
