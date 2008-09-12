@@ -11,6 +11,8 @@ tasks:
 * change the color page to use bright breakout colors
 * style the header and footer
 * add a "show library" button
+* write top text for bricks
+* write the jazz page
 
 finishing checks:
 * make sure pages are valid HTML (all entities escaped, esp)

@@ -1,10 +1,7 @@
 <%namespace name="head" file="head.mak" />
 ${head.head(1020)}
-	<div id="explain">Adding mouse support to our game is even simpler;
-    all we have to do is send the mousemove event to an onMouseMove
-    function, see if the mouse is within the borders of the game,
-    and move the paddle if it is.
-    <div id="codebox">
+	<div id="explain">Adding the bricks 
+	<div id="codebox">
        <textarea id="code" rows=10 cols=50>var bricks;
 var NROWS = 5;
 var NCOLS = 5;
