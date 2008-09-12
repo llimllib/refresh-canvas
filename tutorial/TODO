@@ -9,6 +9,7 @@
     be a good way to introduce such things?
   * need to explain that basic familiarity with programming/javascript
     are assumed
+* a good early page might be a color page - use breakout colors
 * when/ever to talk about the stack nature of canvas?
 * style the header and footer
 * change all code to 2-space tabs (or change indenter to 4-space tabs?)
@@ -16,4 +17,6 @@
 * add a "show library" button
 * add an abort() button (or not?)
 * where should the draw() button be? top or bottom? keyboard shortcut?
-* should the canvas follow the user's scrolling? (like Meier's home page)
+* run spellcheck when finish
+* on the "else you lose" bit, just clearInterval. Save the interval for
+  this purpose
