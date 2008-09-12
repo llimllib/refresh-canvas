@@ -13,6 +13,7 @@ body { min-width: 750px; }
 				   margin-top: 5px;
                    width: 320px;
                    float: left;
+				   position: fixed;
 }
 <%
     codebox_width = 450
@@ -25,6 +26,7 @@ body { min-width: 750px; }
 #textcontainer {font: 14px;
     margin-left: 320px;
     margin-right: 10px;
+	margin-top:   10px;
 }
 #footer {clear:both;}
 
