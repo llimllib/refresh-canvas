@@ -1,6 +1,5 @@
 * have a side page to talk about why you need the beginPath() and closePath()
 * explain why/that we're using jQuery
-* talk about functions? set up a basic library?
 * provide a link for what setInterval(...) is
   * I should liberally scatter links about topics I introduce but don't
     explain
@@ -10,13 +9,16 @@
   * need to explain that basic familiarity with programming/javascript
     are assumed
 * change the color page to use bright breakout colors
-* when/ever to talk about the stack nature of canvas?
 * style the header and footer
-* change all code to 2-space tabs (or change indenter to 4-space tabs?)
-* make slide titles
+* verify that all code uses 2-space tabs
 * add a "show library" button
-* add an abort() button (or not?)
+* run spellcheck when finished
+* make sure all variables are declared "var"
+* remove all tabs (wtf is vim doing?)
+* update all <, >, and & to escaped versions
+
+Qs:
+* how to have slide titles?
 * where should the draw() button be? top or bottom? keyboard shortcut?
-* run spellcheck when finish
-* on the "else you lose" bit, just clearInterval. Save the interval for
-  this purpose
+* add an abort() button?
+* when/ever to talk about the stack nature of canvas?
