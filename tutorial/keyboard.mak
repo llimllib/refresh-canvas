@@ -52,6 +52,10 @@ init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
+        Now that we've got a working paddle, animation, and a bouncing ball,
+        we've got something close to a game coming together.
+		<p>On the next page, we'll move support for the keyboard into the
+		library and add support for the mouse in a very similar manner.
 	</div>
 
 	   <textarea id="library" style="display: none">
@@ -89,4 +93,4 @@ function init() {
   return setInterval(draw, 10);
 }
        </textarea>
-${head.next('keyboard.html')}
+${head.next('mouse.html')}
