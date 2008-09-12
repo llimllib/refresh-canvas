@@ -9,7 +9,7 @@
     be a good way to introduce such things?
   * need to explain that basic familiarity with programming/javascript
     are assumed
-* a good early page might be a color page - use breakout colors
+* change the color page to use bright breakout colors
 * when/ever to talk about the stack nature of canvas?
 * style the header and footer
 * change all code to 2-space tabs (or change indenter to 4-space tabs?)
