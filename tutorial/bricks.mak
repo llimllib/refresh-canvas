@@ -14,9 +14,9 @@ var PADDING = 1;
 
 function initbricks() {
     bricks = new Array(NROWS);
-    for (i=0; i < NROWS; i++) {
+    for (i=0; i &lt; NROWS; i++) {
         bricks[i] = new Array(NCOLS);
-        for (j=0; j < NCOLS; j++) {
+        for (j=0; j &lt; NCOLS; j++) {
             bricks[i][j] = 1;
         }
     }
@@ -32,7 +32,7 @@ function draw() {
 
   //draw bricks
   for (i=0; i &lt; NROWS; i++) {
-    for (j=0; j < NCOLS; j++) {
+    for (j=0; j &lt; NCOLS; j++) {
       if (bricks[i][j] == 1) {
         rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
              (i * (BRICKHEIGHT + PADDING)) + PADDING,
@@ -46,18 +46,18 @@ function draw() {
   colwidth = BRICKWIDTH + PADDING;
   row = Math.floor(y/rowheight)
   col = Math.floor(x/colwidth)
-  if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
+  if (y &lt; NROWS * rowheight &amp;&amp; row &gt;= 0 &amp;&amp; col &gt;= 0 &amp;&amp; bricks[row][col] == 1) {
     dy = -dy;
     bricks[row][col] = 0;
   }
  
-  if (x + dx > WIDTH || x + dx < 0)
+  if (x + dx &gt; WIDTH || x + dx &lt; 0)
 	  dx = -dx;
 
-  if (y + dy < 0)
+  if (y + dy &lt; 0)
     dy = -dy;
-  else if (y + dy > HEIGHT) {
-    if (x > paddlex && x < paddlex + paddlew)
+  else if (y + dy &gt; HEIGHT) {
+    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew)
       dy = -dy;
     else
       clearInterval(intervalId);
@@ -71,12 +71,13 @@ initbricks();
 init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
-    <p>Try changing the onMouseMove function so that the paddle won't move any
-    part of itself past the right side of the canvas.
-		<p>Now that the keyboard and mouse work, all that's left to do is put in
-    the bricks and add some design and code polish. As usual, we'll stuff all
-    the code not in the draw() function into the library on all future pages.
-	</div>
+    <p>Try adding code to make the ball bounce in different directions
+    based on where it hits the paddle.
+    <p>It seems at every step as if what we have is getting closer to
+    being a real game, but that it's never quite there. One thing that's
+    for sure is that this version of the game is ugly; on the next page
+    we'll jazz it up a bit.
+    </div>
 
 	   <textarea id="library" style="display: none">
 var x = 150;
@@ -127,7 +128,7 @@ $(document).keydown(onKeyDown);
 $(document).keyup(onKeyUp);
 
 function onMouseMove(evt) {
-  if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
+  if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
     paddlex = evt.pageX - canvasMinX;
   }
 }
