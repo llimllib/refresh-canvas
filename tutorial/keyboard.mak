@@ -38,11 +38,12 @@ function draw() {
 
   if (y + dy < 0)
 	  dy = -dy;
-  else if (y + dy > HEIGHT
-        && x > paddlex
-        && x < paddlex + paddlew)
-    dy = -dy;
-  //else game over, you lose
+  else if (y + dy > HEIGHT) {
+    if (x > paddlex && x < paddlex + paddlew)
+      dy = -dy;
+    else
+      clearInterval(intervalId);
+  }
  
   x += dx;
   y += dy;
@@ -66,9 +67,10 @@ var dy = 4;
 var ctx;
 var WIDTH = $("canvas").width()
 var HEIGHT = $("canvas").height()
-paddlex = WIDTH / 2;
-paddleh = 10;
-paddlew = 75;
+var paddlex = WIDTH / 2;
+var paddleh = 10;
+var paddlew = 75;
+var intervalId = 0;
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -90,7 +92,8 @@ function clear() {
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
-  return setInterval(draw, 10);
+  intervalId = setInterval(draw, 10);
+  return intervalId;
 }
        </textarea>
 ${head.next('mouse.html')}

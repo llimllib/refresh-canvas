@@ -1,5 +1,5 @@
 <%namespace name="head" file="head.mak" />
-${head.head(510)}
+${head.head(520)}
 	<div id="explain">Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
@@ -25,12 +25,13 @@ function draw() {
 	  dx = -dx;
 
   if (y + dy < 0)
-	  dy = -dy;
-  else if (y + dy > HEIGHT
-        && x > paddlex
-        && x < paddlex + paddlew)
     dy = -dy;
-  //else game over, you lose
+  else if (y + dy > HEIGHT) {
+    if (x > paddlex && x < paddlex + paddlew)
+      dy = -dy;
+    else
+      clearInterval(intervalId);
+  }
  
   x += dx;
   y += dy;
@@ -42,8 +43,8 @@ init();</textarea>
 		<p>
         Now that we've got a working paddle, animation, and a bouncing ball,
         we've got something close to a game coming together.
-		<p>On the next page, we'll move support for the keyboard into the
-		library and add support for the mouse in a very similar manner.
+        <p>On the next page, we'll move support for the keyboard into the
+        library and add support for the mouse in a very similar manner.
 	</div>
 
 	   <textarea id="library" style="display: none">
@@ -61,6 +62,7 @@ var rightDown = false;
 var leftDown = false;
 var canvasMinX = 0;
 var canvasMaxX = 0;
+var intervalId = 0;
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -97,7 +99,8 @@ function init() {
   ctx = $('#canvas')[0].getContext("2d");
   canvasMinX = $("#canvas").offset().left;
   canvasMaxX = canvasMinX + $("#canvas").width();
-  return setInterval(draw, 10);
+  intervalId = setInterval(draw, 10);
+  return intervalId;
 }
        </textarea>
 ${head.next('keyboard.html')}

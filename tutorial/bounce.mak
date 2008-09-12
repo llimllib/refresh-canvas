@@ -1,5 +1,29 @@
 <%namespace name="head" file="head.mak" />
 ${head.head(190)}
+	<div id="explain">Our ball can fly! But it runs away too quickly; let's
+	contain it in our box by rebounding off the walls.
+	<div id="codebox">
+       <textarea id="code" rows=10 cols=50>function draw() {
+  clear();
+  circle(x, y, 10);
+ 
+  if (x + dx > WIDTH || x + dx < 0)
+	  dx = -dx;
+  if (y + dy > HEIGHT || y + dy < 0)
+	  dy = -dy;
+ 
+  x += dx;
+  y += dy;
+}
+
+init();</textarea>
+		</div>
+		<input type="submit" value="run code" onclick="runCode()"/><br>
+		<p>
+        Try to change the draw() function so that the ball accelerates or decelerates
+        every time it hits a wall.
+	</div>
+
 	   <textarea id="library" style="display: none">
 var x = 150;
 var y = 150;
@@ -32,28 +56,4 @@ function init() {
   return setInterval(draw, 10);
 }
        </textarea>
-	<div id="explain">Our ball can fly! But it runs away too quickly; let's
-	contain it in our box by rebounding off the walls.
-	<div id="codebox">
-       <textarea id="code" rows=10 cols=50>function draw() {
-  clear();
-  circle(x, y, 10);
- 
-  if (x + dx > WIDTH || x + dx < 0)
-	  dx = -dx;
-  if (y + dy > HEIGHT || y + dy < 0)
-	  dy = -dy;
- 
-  x += dx;
-  y += dy;
-}
-
-init();</textarea>
-		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
-		<p>
-        Try to change the draw() function so that the ball accelerates or decelerates
-        every time it hits a wall.
-	</div>
-
 ${head.next('paddle.html')}
