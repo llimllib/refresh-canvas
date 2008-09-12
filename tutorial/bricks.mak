@@ -1,21 +1,27 @@
 <%namespace name="head" file="head.mak" />
-${head.head(520)}
+${head.head(1020)}
 	<div id="explain">Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
     and move the paddle if it is.
     <div id="codebox">
-       <textarea id="code" rows=10 cols=50>var canvasMinX = $("#canvas").offset().left;
-var canvasMaxX = canvasMinX + $("#canvas").width();
+       <textarea id="code" rows=10 cols=50>var bricks;
+var NROWS = 5;
+var NCOLS = 5;
+var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKHEIGHT = 15;
+var PADDING = 1;
 
-function onMouseMove(evt) {
-  if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
-    paddlex = evt.pageX - canvasMinX;
-  }
+function initbricks() {
+    bricks = new Array(NROWS);
+    for (i=0; i < NROWS; i++) {
+        bricks[i] = new Array(NCOLS);
+        for (j=0; j < NCOLS; j++) {
+            bricks[i][j] = 1;
+        }
+    }
 }
-
-$(document).mousemove(onMouseMove);
-	   
+       
 function draw() {
   clear();
   circle(x, y, 10);
@@ -23,6 +29,27 @@ function draw() {
   if (rightDown) paddlex += 5;
   else if (leftDown) paddlex -= 5;
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+
+  //draw bricks
+  for (i=0; i &lt; NROWS; i++) {
+    for (j=0; j < NCOLS; j++) {
+      if (bricks[i][j] == 1) {
+        rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
+             (i * (BRICKHEIGHT + PADDING)) + PADDING,
+             BRICKWIDTH, BRICKHEIGHT);
+      }
+    }
+  }
+
+  //have we hit a brick?
+  rowheight = BRICKHEIGHT + PADDING;
+  colwidth = BRICKWIDTH + PADDING;
+  row = Math.floor(y/rowheight)
+  col = Math.floor(x/colwidth)
+  if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
+    dy = -dy;
+    bricks[row][col] = 0;
+  }
  
   if (x + dx > WIDTH || x + dx < 0)
 	  dx = -dx;
@@ -40,6 +67,7 @@ function draw() {
   y += dy;
 }
 
+initbricks();
 init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
@@ -98,6 +126,14 @@ function onKeyUp(evt) {
 $(document).keydown(onKeyDown);
 $(document).keyup(onKeyUp);
 
+function onMouseMove(evt) {
+  if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
+    paddlex = evt.pageX - canvasMinX;
+  }
+}
+
+$(document).mousemove(onMouseMove);
+
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
   canvasMinX = $("#canvas").offset().left;
@@ -107,4 +143,4 @@ function init() {
 }
        </textarea>
 
-${head.next('bricks.html')}
+${head.next('jazz.html')}
