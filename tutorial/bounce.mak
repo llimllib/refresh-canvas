@@ -7,9 +7,9 @@ ${head.head(190)}
   clear();
   circle(x, y, 10);
  
-  if (x + dx > WIDTH || x + dx < 0)
+  if (x + dx &gt; WIDTH || x + dx &lt; 0)
 	  dx = -dx;
-  if (y + dy > HEIGHT || y + dy < 0)
+  if (y + dy &gt; HEIGHT || y + dy &lt; 0)
 	  dy = -dy;
  
   x += dx;

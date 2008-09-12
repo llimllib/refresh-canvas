@@ -9,8 +9,8 @@ ${head.head(570)}
 var canvasMaxX = canvasMinX + $("#canvas").width();
 
 function onMouseMove(evt) {
-  if (evt.pageX > canvasMinX
-   && evt.pageX < canvasMaxX) {
+  if (evt.pageX &gt; canvasMinX
+   &amp;&amp; evt.pageX &lt; canvasMaxX) {
     paddlex = evt.pageX - canvasMinX;
   }
 }
@@ -25,13 +25,13 @@ function draw() {
   else if (leftDown) paddlex -= 5;
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
  
-  if (x + dx > WIDTH || x + dx < 0)
+  if (x + dx &gt; WIDTH || x + dx &lt; 0)
 	  dx = -dx;
 
-  if (y + dy < 0)
+  if (y + dy &lt; 0)
     dy = -dy;
-  else if (y + dy > HEIGHT) {
-    if (x > paddlex && x < paddlex + paddlew)
+  else if (y + dy &gt; HEIGHT) {
+    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew)
       dy = -dy;
     else
       clearInterval(intervalId);
