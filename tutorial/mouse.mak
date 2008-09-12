@@ -5,7 +5,10 @@ ${head.head(520)}
     function, see if the mouse is within the borders of the game,
     and move the paddle if it is.
     <div id="codebox">
-       <textarea id="code" rows=10 cols=50>function onMouseMove(evt) {
+       <textarea id="code" rows=10 cols=50>var canvasMinX = $("#canvas").offset().left;
+var canvasMaxX = canvasMinX + $("#canvas").width();
+
+function onMouseMove(evt) {
   if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
     paddlex = evt.pageX - canvasMinX;
   }
@@ -40,11 +43,11 @@ function draw() {
 init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
-		<p>
-        Now that we've got a working paddle, animation, and a bouncing ball,
-        we've got something close to a game coming together.
-        <p>On the next page, we'll move support for the keyboard into the
-        library and add support for the mouse in a very similar manner.
+    <p>Try changing the onMouseMove function so that the paddle won't move any
+    part of itself past the right side of the canvas.
+		<p>Now that the keyboard and mouse work, all that's left to do is put in
+    the bricks and add some design and code polish. As usual, we'll stuff all
+    the code not in the draw() function into the library on all future pages.
 	</div>
 
 	   <textarea id="library" style="display: none">
@@ -103,4 +106,5 @@ function init() {
   return intervalId;
 }
        </textarea>
-${head.next('keyboard.html')}
+
+${head.next('bricks.html')}
