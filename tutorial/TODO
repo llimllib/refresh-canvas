@@ -1,8 +1,8 @@
-* have a side page to talk about why you need the beginPath() and closePath()
+tasks:
+* add explanatory links for those who want more info
+    * beginPath() and closePath()
+    * what setInterval(...) is
 * explain why/that we're using jQuery
-* provide a link for what setInterval(...) is
-  * I should liberally scatter links about topics I introduce but don't
-    explain
 * need an intro page explaining how the tut works
   * would sidebars underneath the canvas (in light yellow, maybe?)
     be a good way to introduce such things?
@@ -10,12 +10,13 @@
     are assumed
 * change the color page to use bright breakout colors
 * style the header and footer
-* verify that all code uses 2-space tabs
 * add a "show library" button
-* run spellcheck when finished
-* make sure all variables are declared "var"
+
+finishing checks:
+* make sure pages are valid HTML (all entities escaped, esp)
 * remove all tabs (wtf is vim doing?)
-* update all <, >, and & to escaped versions
+* make sure all variables are declared "var"
+* run spellcheck
 
 Qs:
 * how to have slide titles?
