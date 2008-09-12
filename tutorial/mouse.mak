@@ -1,5 +1,5 @@
 <%namespace name="head" file="head.mak" />
-${head.head(520)}
+${head.head(570)}
 	<div id="explain">Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
@@ -9,7 +9,8 @@ ${head.head(520)}
 var canvasMaxX = canvasMinX + $("#canvas").width();
 
 function onMouseMove(evt) {
-  if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
+  if (evt.pageX > canvasMinX
+   && evt.pageX < canvasMaxX) {
     paddlex = evt.pageX - canvasMinX;
   }
 }
@@ -43,8 +44,8 @@ function draw() {
 init();</textarea>
 		</div>
 		<input type="submit" value="run code" onclick="runCode()"/><br>
-    <p>Try changing the onMouseMove function so that the paddle won't move any
-    part of itself past the right side of the canvas.
+    <p>Try changing the draw function so that the middle of the paddle is
+		located directly above the mouse pointer instead of the left side.
 		<p>Now that the keyboard and mouse work, all that's left to do is put in
     the bricks and add some design and code polish. As usual, we'll stuff all
     the code not in the draw() function into the library on all future pages.
