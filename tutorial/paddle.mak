@@ -31,7 +31,6 @@ function draw() {
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
     You probably want to be able to move the paddle - we'll cover that in
     the next page.

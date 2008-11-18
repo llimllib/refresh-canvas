@@ -43,7 +43,6 @@ function draw() {
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
     <p>Try changing the draw function so that the middle of the paddle is
 		located directly above the mouse pointer instead of the left side.
 		<p>Now that the keyboard and mouse work, all that's left to do is put in

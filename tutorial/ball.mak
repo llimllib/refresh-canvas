@@ -11,7 +11,6 @@ ctx.beginPath();
 ctx.arc(75, 75, 10, 0, Math.PI*2, true); 
 ctx.closePath();
 ctx.fill();</textarea></div>
-			<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
 		You may want to comment out the <code>arc(...)</code> call and try
 		<code>ctx.rect(x, y, width, height)</code>.

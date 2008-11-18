@@ -17,6 +17,11 @@ var ctx;
 var WIDTH = $("canvas").width()
 var HEIGHT = $("canvas").height()
 
+function init() {
+  ctx = $('#canvas')[0].getContext("2d");
+  return setInterval(draw, 10);
+}
+
 function circle(x,y,r) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI*2, true);
@@ -35,11 +40,6 @@ function clear() {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
-function init() {
-  ctx = $('#canvas')[0].getContext("2d");
-  return setInterval(draw, 10);
-}
-
 //END LIBRARY CODE
 
 function draw() {
@@ -52,7 +52,6 @@ function draw() {
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
 		See how much simpler the draw() function is now? Functionally,
     everything should still work the same.

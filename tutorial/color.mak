@@ -26,7 +26,6 @@ ctx.beginPath();
 ctx.rect(15, 150, 120, 120);
 ctx.closePath();
 ctx.fill();</textarea></div>
-			<input type="submit" value="run code" onclick="runCode()"/><br>
 			<p>
 			Play around a bit with the colors and the rectangle's alpha value and see
 			how the objects respond.

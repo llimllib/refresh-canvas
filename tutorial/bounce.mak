@@ -18,7 +18,6 @@ ${head.head(190)}
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
         Try to change the draw() function so that the ball accelerates or decelerates
         every time it hits a wall.

@@ -51,7 +51,6 @@ function draw() {
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
         Now that we've got a working paddle, animation, and a bouncing ball,
         we've got something close to a game coming together.

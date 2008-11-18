@@ -16,7 +16,7 @@ body { min-width: 750px; }
 				   position: fixed;
 }
 <%
-    codebox_width = 450
+    codebox_width = 700
 %>
 #codebox {border: 1px solid LightGray;
           width:${codebox_width+4}px;
@@ -72,6 +72,9 @@ editor = CodeMirror.fromTextArea("code", {
 
    <div id="canvascontainer">
        <canvas id="canvas" width="300" height="300"></canvas>
+       <div style="text-align:center">
+       <input type="submit" value="run code" onclick="runCode()"/>
+       </div>
    </div>
    <div id="textcontainer">
 

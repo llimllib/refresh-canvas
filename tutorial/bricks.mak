@@ -67,7 +67,6 @@ function draw() {
 initbricks();
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
     <p>Try adding code to make the ball bounce in different directions
     based on where it hits the paddle.
     <p>It seems at every step as if what we have is getting closer to
@@ -77,10 +76,10 @@ init();</textarea>
     </div>
 
 	   <textarea id="library" style="display: none">
-var x = 150;
-var y = 150;
-var dx = 2;
-var dy = 4;
+var x = 25;
+var y = 250;
+var dx = 1.5;
+var dy = -4;
 var ctx;
 var WIDTH = $("canvas").width()
 var HEIGHT = $("canvas").height()
@@ -138,7 +137,6 @@ function init() {
   canvasMaxX = canvasMinX + $("#canvas").width();
   intervalId = setInterval(draw, 10);
   return intervalId;
-}
-       </textarea>
+}</textarea>
 
 ${head.next('jazz.html')}

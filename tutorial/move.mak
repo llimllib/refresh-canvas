@@ -31,7 +31,6 @@ function draw() {
 
 init();</textarea>
 		</div>
-		<input type="submit" value="run code" onclick="runCode()"/><br>
 		<p>
         Try changing the dx and dy values to change the direction of the ball,
         or change the x and y variables to change where the ball will start.
