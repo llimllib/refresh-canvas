@@ -50,8 +50,8 @@ init();</textarea>
     the code not in the draw() function into the library on all future pages.
 	</div>
 
-	   <textarea id="library" style="display: none">
-var x = 150;
+<div id="libraryContainer">
+<textarea id="library" style="display: none">var x = 150;
 var y = 150;
 var dx = 2;
 var dy = 4;
@@ -105,6 +105,6 @@ function init() {
   intervalId = setInterval(draw, 10);
   return intervalId;
 }
-       </textarea>
+       </textarea></div>
 
-${head.next('bricks.html')}
+${head.link('keyboard', 'bricks')}

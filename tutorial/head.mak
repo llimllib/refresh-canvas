@@ -23,6 +23,11 @@ body { min-width: 750px; }
           height:${codebox_height}px;
           margin-top: 10px;
 }
+#libraryContainer {border: 1px solid LightGray;
+          width:${codebox_width+4}px;
+          height:${codebox_height}px;
+          margin-top: 10px;
+}
 #textcontainer {font: 14px;
     margin-left: 320px;
     margin-right: 10px;
@@ -37,6 +42,7 @@ body { min-width: 750px; }
   <title>Canvas Tutorial</title>
   <script type="application/x-javascript">
 var editor = undefined;
+var libEditor = undefined;
 var intervalID = undefined;
 
 function runCode() {
@@ -51,7 +57,11 @@ function runCode() {
     intervalID = eval(editor.getCode());
 }
 
+var libraryOpen = false;
+
 $(document).ready(function(){
+
+$("#libraryContainer").hide();
 
 editor = CodeMirror.fromTextArea("code", {
   parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
@@ -59,6 +69,21 @@ editor = CodeMirror.fromTextArea("code", {
   stylesheet: "codemirror/jscolors.css",
   width: "${codebox_width}px",
   height: "${codebox_height}px",
+});
+
+libEditor = CodeMirror.fromTextArea("library", {
+  parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+  path: "codemirror/",
+  stylesheet: "codemirror/jscolors.css",
+  width: "${codebox_width}px",
+  height: "${codebox_height}px",
+});
+
+$("#showlib").click(function() {
+	$("#explain").toggle();
+	$("#libraryContainer").toggle();
+	var text = libraryOpen ? "Show Library" : "Show Code";
+	$("#showlib").text(text);
 });
 
 });
@@ -75,14 +100,19 @@ editor = CodeMirror.fromTextArea("code", {
        <div style="text-align:center">
        <input type="submit" value="run code" onclick="runCode()"/>
        </div>
+	   <a href="#" id="showlib">Show Library</a><br>
+	   <a href="#" id="prevLink">prev</a> <a href="#" id="nextLink" style="text-align: right;">next</a>
    </div>
    <div id="textcontainer">
 
 </%def>
 
-<%def name="next(f)">
+<%def name="link(p, f)">
     <div id="footer">
-       <a href="${f}">next &gt;&gt;</a>
+	   % if p:
+		   <a href="${p}.html">&lt; &lt; previous</a>
+	   % endif
+       <a href="${f}.html">next &gt;&gt;</a>
     </div>
     </div>
  </body>

@@ -73,4 +73,4 @@ function init() {
 	return intervalId;
 }
        </textarea>
-${head.next('keyboard.html')}
+${head.link('bounce', 'keyboard')}

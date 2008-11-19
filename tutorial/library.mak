@@ -57,4 +57,4 @@ init();</textarea>
     everything should still work the same.
 	</div>
 
-${head.next('bounce.html')}
+${head.link('move', 'bounce')}

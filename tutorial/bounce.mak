@@ -55,4 +55,4 @@ function init() {
   return setInterval(draw, 10);
 }
        </textarea>
-${head.next('paddle.html')}
+${head.link('library', 'paddle')}

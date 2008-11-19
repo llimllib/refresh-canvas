@@ -1,6 +1,9 @@
 <%namespace name="head" file="head.mak" />
 ${head.head(1020)}
-	<div id="explain">Adding the bricks 
+	<div id="explain">Now we'll create a <a
+	href="http://www.webreference.com/programming/javascript/diaries/12/">2-dimensional
+	array</a> to hold bricks, use a couple loops to draw the ones that haven't
+	been broken, and make sure to remove bricks when they've been hit.
 	<div id="codebox">
        <textarea id="code" rows=10 cols=50>var bricks;
 var NROWS = 5;
@@ -41,8 +44,9 @@ function draw() {
   //have we hit a brick?
   rowheight = BRICKHEIGHT + PADDING;
   colwidth = BRICKWIDTH + PADDING;
-  row = Math.floor(y/rowheight)
-  col = Math.floor(x/colwidth)
+  row = Math.floor(y/rowheight);
+  col = Math.floor(x/colwidth);
+  //if so, reverse the ball and mark the brick as broken
   if (y &lt; NROWS * rowheight &amp;&amp; row &gt;= 0 &amp;&amp; col &gt;= 0 &amp;&amp; bricks[row][col] == 1) {
     dy = -dy;
     bricks[row][col] = 0;
@@ -74,9 +78,8 @@ init();</textarea>
     for sure is that this version of the game is ugly; on the next page
     we'll jazz it up a bit.
     </div>
-
-	   <textarea id="library" style="display: none">
-var x = 25;
+<div id="libraryContainer">
+<textarea id="library">var x = 25;
 var y = 250;
 var dx = 1.5;
 var dy = -4;
@@ -137,6 +140,7 @@ function init() {
   canvasMaxX = canvasMinX + $("#canvas").width();
   intervalId = setInterval(draw, 10);
   return intervalId;
-}</textarea>
+}</textarea></div>
+</div>
 
-${head.next('jazz.html')}
+${head.link('mouse', 'jazz')}

@@ -30,4 +30,4 @@ ctx.fill();</textarea></div>
 			Play around a bit with the colors and the rectangle's alpha value and see
 			how the objects respond.
     </div>
-${head.next('move.html')}
+${head.link('ball', 'move')}

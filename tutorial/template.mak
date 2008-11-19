@@ -10,4 +10,4 @@ ${head.head()}
    <pre>&lt;canvas id="canvas" width="300" height="300"&gt;&lt;/canvas&gt;</pre>
    This declaration creates the canvas on which we'll draw in the rest of the tutorial.</div>
 
-${head.next("ball.html")}
+${head.link(None, "ball")}

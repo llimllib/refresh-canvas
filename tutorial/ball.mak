@@ -19,4 +19,4 @@ ctx.fill();</textarea></div>
 		sample call above. You may also try substituting <code>stroke()</code>
 		for <code>fill()</code>.
     </div>
-${head.next('color.html')}
+${head.link('template', 'color')}

@@ -95,4 +95,4 @@ function init() {
   return intervalId;
 }
        </textarea>
-${head.next('mouse.html')}
+${head.link('paddle', 'mouse')}
