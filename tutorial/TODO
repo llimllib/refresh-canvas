@@ -13,6 +13,8 @@ tasks:
 * add a "show library" button
 * write top text for bricks
 * write the jazz page
+* move CSS to its own file
+* add tabs
 
 finishing checks:
 * make sure pages are valid HTML (all entities escaped, esp)

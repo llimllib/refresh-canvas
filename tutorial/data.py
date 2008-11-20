@@ -1,4 +1,4 @@
-[{"name": "template",
+[{"name": "intro",
 "explain_before":  """What we're going to do in this tutorial is use the new 
    &lt;canvas&gt; element to create a simplified clone of the old Atari game
    <a href="http://billmill.org/static/refresh-canvas/presentation/pix/breakout_cover.jpg">Breakout</a>.
