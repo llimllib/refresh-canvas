@@ -15,7 +15,7 @@ body { min-width: 750px; }
                    position: fixed;
 }
 <%
-    codebox_height = code.count("\n") * 20
+    codebox_height = 26 + code.count("\n") * 15
     codebox_width = 700
 %>
 #codebox {border: 1px solid LightGray;
@@ -37,11 +37,14 @@ body { min-width: 750px; }
 #footer {clear:both;}
 
 #canvas { border: 1px solid DarkGray; }
-  </style>
-  <script type="text/javascript" src="jquery-1.2.6.js"></script>
-  <script type="text/javascript" src="codemirror/codemirror.js"></script>
-  <title>Canvas Tutorial</title>
-  <script type="application/x-javascript">
+#libraryBox { border: 1px solid DarkGray; }
+    </style>
+    <script type="text/javascript" src="jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.6rc2.js"></script>
+    <link rel="stylesheet" href="theme/ui-theme.css" type="text/css" media="screen">
+    <script type="text/javascript" src="codemirror/codemirror.js"></script>
+    <title>Canvas Tutorial</title>
+<script type="text/javascript">
 var editor = undefined;
 var libEditor = undefined;
 var intervalID = undefined;
@@ -62,31 +65,25 @@ var libraryOpen = false;
 
 $(document).ready(function(){
 
-$("#libraryContainer").hide();
+    $("#libraryContainer").hide();
 
-editor = CodeMirror.fromTextArea("code", {
-  parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-  path: "codemirror/",
-  stylesheet: "codemirror/jscolors.css",
-  width: "${codebox_width}px",
-  height: "${codebox_height}px",
-});
+    editor = CodeMirror.fromTextArea("code", {
+      parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+      path: "codemirror/",
+      stylesheet: "codemirror/jscolors.css",
+      width: "${codebox_width}px",
+      height: "${codebox_height}px",
+    });
 
-libEditor = CodeMirror.fromTextArea("library", {
-  parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-  path: "codemirror/",
-  stylesheet: "codemirror/jscolors.css",
-  width: "${codebox_width}px",
-  height: "${codebox_height}px",
-});
+    libEditor = CodeMirror.fromTextArea("library", {
+      parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+      path: "codemirror/",
+      stylesheet: "codemirror/jscolors.css",
+      width: "${codebox_width}px",
+      height: "${codebox_height}px",
+    });
 
-$("#showlib").click(function() {
-    $("#explain").toggle();
-    $("#libraryContainer").toggle();
-    var text = libraryOpen ? "Show Library" : "Show Code";
-    $("#showlib").text(text);
-});
-
+    $("#textcontainer ul").tabs();
 });
   </script>
  </head>
@@ -96,36 +93,41 @@ $("#showlib").click(function() {
    <h2>Breakout Tutorial</h2>
     </div>-->
 
-   <div id="canvascontainer">
-       <canvas id="canvas" width="300" height="300"></canvas>
-       <div style="text-align:center">
-       <input type="submit" value="run code" onclick="runCode()"/>
-       </div>
-       <a href="#" id="showlib">Show Library</a><br>
-	    % if prev:
-	        <a href="${prev}.html" id="prevLink">prev</a>
-	    % endif
-        % if next:
-            <a href="${next}.html" id="nextLink" style="text-align: right;">next</a>
-        % endif
-   </div>
-   <div id="textcontainer">
+    <div id="canvascontainer">
+         <canvas id="canvas" width="300" height="300"></canvas>
+         <div style="text-align:center">
+         <input type="submit" value="run code" onclick="runCode()"/>
+         </div>
 
-   <div id="explain">${explain_before}
-   % if code:
-        <div id="codebox">
-        <textarea id="code" rows=${code.count("\n")+1} cols=80>${code}</textarea>
-        </div>
-        <p>${explain_after}
-   % endif
-   </div>
-
-    <div id="footer">
-       ##% if p:
-       ##<a href="${p}.html">&lt; &lt; previous</a>
-       ##% endif
-       ##<a href="${f}.html">next &gt;&gt;</a>
+         % if prev:
+             <a href="${prev}.html" id="prevLink">prev</a>
+         % endif
+         % if next:
+             <a href="${next}.html" id="nextLink">next</a>
+         % endif
     </div>
+
+    <div id="textcontainer">
+        <ul><li class="ui-tabs-nav-item"><a href="#explain"><span>Code</span></a></li>
+            <li class="ui-tabs-nav-item"><a href="#libraryContainer"><span>Library</span></a></li>
+        </ul>
+        <div id="explain">${explain_before}
+            % if code:
+                 <div id="codebox">
+                 <textarea id="code" rows=${code.count("\n")+1} cols=100>${code}</textarea>
+                 </div>
+                 <p>${explain_after}
+            % endif
+        </div>
+     
+        <div id="libraryContainer">
+        % if library:
+            <div id="libraryBox">
+                <textarea id="library" rows=${library.count("\n")+1}
+                          cols=100>${library}</textarea>
+            </div>
+        % endif
+        </div>
     </div>
  </body>
 </html>

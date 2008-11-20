@@ -10,11 +10,12 @@ tasks:
     are assumed
 * change the color page to use bright breakout colors
 * style the header and footer
-* add a "show library" button
+  * better tab style
 * write top text for bricks
 * write the jazz page
-* move CSS to its own file
-* add tabs
+* reasonable next and prev
+* left pane table of contents
+* add a title for each page and append to the <title>
 
 finishing checks:
 * make sure pages are valid HTML (all entities escaped, esp)
