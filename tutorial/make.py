@@ -8,7 +8,7 @@ pages = eval(file("data.py").read())
 def required(page, required_vars):
     for var in required_vars: page[var] = page.get(var, "")
 
-toc = [(page["title"], page["name"]+".html") for i, page in enumerate(pages)]
+toc = [(page["title"], page["name"]+".html") for page in pages]
 
 for i, page in enumerate(pages):
     page["prev"] = pages[i-1]["name"] if i > 0 else ""
