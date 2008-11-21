@@ -6,7 +6,8 @@ body, html {margin:0;
             background:white;
             color:#000;
 }
-body { min-width: 750px; }
+body { min-width: 750px; 
+	   font-size: 62.5%;}
 #wrap { margin:0 auto; width:100%; }
 #canvascontainer { margin-left: 5px;
                    margin-top: 5px;
