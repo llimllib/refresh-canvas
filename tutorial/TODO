@@ -12,18 +12,17 @@ tasks:
 * style the header and footer
 * write top text for bricks
 * write the jazz page
-* reasonable next and prev
-* left pane table of contents
-* add a title for each page and append to the <title>
+* better titles
+* make deployment work
+  * write script
+  * script references need to change
 
 finishing checks:
 * make sure pages are valid HTML (all entities escaped, esp)
-* remove all tabs (wtf is vim doing?)
 * make sure all variables are declared "var"
 * run spellcheck
 
 Qs:
 * how to have slide titles?
-* where should the draw() button be? top or bottom? keyboard shortcut?
 * add an abort() button?
 * when/ever to talk about the stack nature of canvas?

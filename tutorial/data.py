@@ -1,4 +1,5 @@
 [{"name": "intro",
+"title": "intro",
 "explain_before":  """What we're going to do in this tutorial is use the new 
    &lt;canvas&gt; element to create a simplified clone of the old Atari game
    <a href="http://billmill.org/static/refresh-canvas/presentation/pix/breakout_cover.jpg">Breakout</a>.
@@ -9,6 +10,7 @@
    This declaration creates the canvas on which we'll draw in the rest of the tutorial."""
  },
  {"name": "ball",
+"title": "ball",
 "explain_before": """Now that we've got a canvas to draw on, let's do so:""",
 "code": """//get a reference to the canvas
 var ctx = $('#canvas')[0].getContext("2d");
@@ -26,6 +28,7 @@ ctx.fill();""",
     for <code>fill()</code>."""
 },
 {"name": "color",
+"title": "color",
 "explain_before": """We can also turn our ball different colors. Changing the value of
 	ctx.fillStyle will change the canvas' current color; we can set its value to a hex
 	string of the format <code>'#rrggbb'</code> or to a string 
@@ -57,6 +60,7 @@ ctx.fill();""",
 """
 },
 {"name": "move",
+"title": "move",
 "explain_before": """Now that we've got a ball, let's make it move.
 	   In order to do so, we'll create a <code>draw()</code> function
 	   which wipes the screen, draws the ball, then updates its current
@@ -92,6 +96,7 @@ init();""",
 """
 },
 {"name": "library",
+"title": "library",
 "explain_before": """Now that we're getting somewhere, our code's getting a bit
 	too big for a single screen, so we'll start sticking some of it into a library
 	of functions to make our lives easier. In future pages, expect the library code
@@ -146,6 +151,7 @@ init();
 "library": "//Nothing here just yet!"
 },
 {"name": "bounce",
+"title": "bounce",
 "explain_before": """Our ball can fly! But it runs away too quickly; let's
 	contain it in our box by rebounding off the walls.""",
 "code": """function draw() {
@@ -196,6 +202,7 @@ function init() {
 }"""
 },
 {"name": "paddle",
+"title": "paddle",
 "explain_before": """Now we can start to think about making our game
   a bit like an actual game. Let's add a paddle, and only allow the
   ball to bounce off the bottom when it hits it.""",
@@ -264,6 +271,7 @@ function init() {
 }"""
 },
 {"name": "keyboard",
+"title": "keyboard",
 "explain_before": """To add keyboard input to control our paddle, we need
   to do two things: find out when the left and right arrows have been
   pressed and move the paddle when they have.
@@ -355,6 +363,7 @@ function init() {
 }"""
 },
 {"name": "mouse",
+"title": "mouse",
 "explain_before": """Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
@@ -460,6 +469,7 @@ function init() {
 }"""
 },
 {"name": "bricks",
+"title": "bricks",
 "explain_before": """Now we'll create a <a
 	href="http://www.webreference.com/programming/javascript/diaries/12/">2-dimensional
 	array</a> to hold bricks, use a couple loops to draw the ones that haven't

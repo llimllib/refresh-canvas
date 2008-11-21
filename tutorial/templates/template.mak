@@ -7,13 +7,14 @@ body, html {margin:0;
             color:#000;
 }
 body { min-width: 750px; 
-	   font-size: 62.5%;}
+       font-size: 62.5%;}
 #wrap { margin:0 auto; width:100%; }
 #canvascontainer { margin-left: 5px;
                    margin-top: 5px;
                    width: 320px;
                    float: left;
                    position: fixed;
+                   font-size: 1.4em;
 }
 <%
     codebox_height = 26 + code.count("\n") * 15
@@ -30,15 +31,18 @@ body { min-width: 750px;
           height:${codebox_height}px;
           margin-top: 10px;
 }
-#textcontainer {font: 14px;
+#textcontainer {font: 1.4em;
     margin-left: 320px;
     margin-right: 10px;
     margin-top:   10px;
 }
+
 #footer {clear:both;}
 
 #canvas { border: 1px solid DarkGray; }
 #libraryBox { border: 1px solid DarkGray; }
+a:link { color: #333; }
+a:visited { color: #999; }
     </style>
     <script type="text/javascript" src="jquery-1.2.6.js"></script>
     <script type="text/javascript" src="jquery-ui-1.6rc2.js"></script>
@@ -57,34 +61,38 @@ function runCode() {
     $("#canvas")[0].getContext("2d").clearRect(0,0,
       $("#canvas")[0].width,
       $("#canvas")[0].height);
+
     //if there's a library defined, eval it
-    eval($("#library").val());
+    if (libEditor != undefined) eval(editor.getCode());
+
     intervalID = eval(editor.getCode());
 }
 
-var libraryOpen = false;
-
 $(document).ready(function(){
-
-    $("#libraryContainer").hide();
-
-    editor = CodeMirror.fromTextArea("code", {
-      parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-      path: "codemirror/",
-      stylesheet: "codemirror/jscolors.css",
-      width: "${codebox_width}px",
-      height: "${codebox_height}px",
-    });
-
-    libEditor = CodeMirror.fromTextArea("library", {
-      parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-      path: "codemirror/",
-      stylesheet: "codemirror/jscolors.css",
-      width: "${codebox_width}px",
-      height: "${codebox_height}px",
-    });
+    % if code:
+        editor = CodeMirror.fromTextArea("code", {
+          parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+          path: "codemirror/",
+          stylesheet: "codemirror/jscolors.css",
+          width: "${codebox_width}px",
+          height: "${codebox_height}px",
+        });
+    % endif
+    
+    % if library:
+        libEditor = CodeMirror.fromTextArea("library", {
+          parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+          path: "codemirror/",
+          stylesheet: "codemirror/jscolors.css",
+          width: "${codebox_width}px",
+          height: "${codebox_height}px",
+        });
+    % endif
 
     $("#textcontainer ul").tabs();
+    % if not library:
+        $("#textcontainer ul").tabs("remove", 1);
+    % endif
 });
   </script>
  </head>
@@ -97,20 +105,27 @@ $(document).ready(function(){
     <div id="canvascontainer">
          <canvas id="canvas" width="300" height="300"></canvas>
          <div style="text-align:center">
-         <input type="submit" value="run code" onclick="runCode()"/>
+             <input type="submit" value="run code" onclick="runCode()"/>
          </div>
 
-         % if prev:
-             <a href="${prev}.html" id="prevLink">prev</a>
-         % endif
          % if next:
-             <a href="${next}.html" id="nextLink">next</a>
+             <a href="${next}.html" id="nextLink" style="float:right; margin-right:20px">next</a>
          % endif
+         % if prev:
+             <a href="${prev}.html" id="prevLink">prev</a><br>
+         % endif
+
+         <ol id="toc">
+             % for title, link in toc:
+                 <li><a href="${link}">${title}</a></li>
+             % endfor
+         </ol>
     </div>
 
     <div id="textcontainer">
         <ul><li class="ui-tabs-nav-item"><a href="#explain"><span>Code</span></a></li>
             <li class="ui-tabs-nav-item"><a href="#libraryContainer"><span>Library</span></a></li>
+            <li class="ui-tabs-nav-item"><a href="#comments"><span>Comments</span></a></li>
         </ul>
         <div id="explain">${explain_before}
             % if code:
@@ -122,13 +137,39 @@ $(document).ready(function(){
         </div>
      
         <div id="libraryContainer">
-        % if library:
-            <div id="libraryBox">
-                <textarea id="library" rows=${library.count("\n")+1}
-                          cols=100>${library}</textarea>
-            </div>
-        % endif
+            % if library:
+                <div id="libraryBox">
+                    <textarea id="library" rows=${library.count("\n")+1}
+                              cols=100>${library}</textarea>
+                </div>
+            % endif
+        </div>
+
+        <div id="comments">
+<!-- begin disqus block -->
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/canvastutorial/embed.js"></script><noscript><a href="http://canvastutorial.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- end disqus block -->
+        
         </div>
     </div>
+
+<!-- begin disqus block -->
+<!-- this may only work on billmill.org/static/canvastutorial -->
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script type="text/javascript" src="http://disqus.com/forums/canvastutorial/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+<!-- end disqus block -->
+//]]>
+</script>
+
  </body>
 </html>
