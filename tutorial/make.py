@@ -18,7 +18,8 @@ for i, page in enumerate(pages):
     page["next"] = pages[i+1]["name"] if i+1 < len(pages) else ""
     page["toc"]  = toc
 
-    required(page, ["code", "explain_before", "explain_after", "title", "hidden_code"])
+    required(page, ["code", "explain_before", "explain_after", "title", "hidden_code",
+                    "library"])
     file(page['name'] + '.html', 'w').write(
         Template(filename="templates/template.mak",
                  lookup=TemplateLookup(directories=['.'])).render(**page))

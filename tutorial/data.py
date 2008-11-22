@@ -1,7 +1,12 @@
 [{"name": "index",
 "title": "Introduction",
 "explain_before": """Welcome! In this tutorial, we're going to create a breakout
-clone that you can play in your browser, using javascript and the canvas element.
+clone that you can play in your browser, using javascript and the &lt;canvas&gt; element.
+<p>In order to use this tutorial, you'll need to have a relatively recent version
+of <a href="http://mozilla.com/firefox">Firefox</a>, <a
+href="http://apple.com/safari">Safari</a>, or <a href="http://opera.com">Opera</a>.
+You cannot use Internet Explorer, because they have decided not to implement the
+&lt;canvas&gt; element.
 <p>Before you read any further, click on the "run code" button on the left to
 play the game that we'll end up creating.
 <p>On every page, you'll be able to click the "run code" button to run the code
@@ -141,7 +146,7 @@ function draw() {
   }
  
   if (x + dx + ballr &gt; WIDTH || x + dx - ballr &lt; 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy - ballr &lt; 0)
     dy = -dy;
@@ -188,10 +193,10 @@ ctx.fill();""",
 {"name": "color",
 "title": "Add Some Color",
 "explain_before": """We can also turn our ball different colors. Changing the value of
-	ctx.fillStyle will change the canvas' current color; we can set its value to a hex
-	string of the format <code>'#rrggbb'</code> or to a string 
-	<code>'rgba(r, g, b, a)'</code> where a is a value
-	between 0 and 1 representing the transparency of the color.
+  ctx.fillStyle will change the canvas' current color; we can set its value to a hex
+  string of the format <code>'#rrggbb'</code> or to a string 
+  <code>'rgba(r, g, b, a)'</code> where a is a value
+  between 0 and 1 representing the transparency of the color.
 """,
 "code": """var ctx = $('#canvas')[0].getContext("2d");
 
@@ -221,12 +226,12 @@ ctx.fill();""",
 "title": "Action",
 "explain_before": """We've already made a <a href="ball.html">ball</a>,
        now let's make it move.
-	   In order to do so, we'll create a <code>draw()</code> function
-	   which wipes the screen, draws the ball, then updates its current
-	   position. We'll use a call to 
-	   <code>setInterval(function, timeout)</code> in the <code>init()</code>
-	   function to tell the browser to run our draw function every 10
-	   milliseconds, creating the illusion of movement.""",
+     In order to do so, we'll create a <code>draw()</code> function
+     which wipes the screen, draws the ball, then updates its current
+     position. We'll use a call to 
+     <code>setInterval(function, timeout)</code> in the <code>init()</code>
+     function to tell the browser to run our draw function every 10
+     milliseconds, creating the illusion of movement.""",
 "code": """var x = 150;
 var y = 150;
 var dx = 2;
@@ -251,16 +256,16 @@ function draw() {
 init();""",
 "explain_after": """Try changing the dx and dy values to change the direction of the ball,
         or change the x and y variables to change where the ball will start.
-		Make sure to try negative values for dx and dy.
+    Make sure to try negative values for dx and dy.
 """
 },
 {"name": "library",
 "title": "Library: an Interlude",
 "explain_before": """Now that we're getting somewhere, our code's getting a bit
-	too big for a single screen, so we'll start sticking some of it into a library
-	of functions to make our lives easier. In future pages, expect the library code
-	to be sitting hidden on the page so that we can focus on our draw() function.
-	<p>Simply hit the "show library" button to review it at any time.""",
+  too big for a single screen, so we'll start sticking some of it into a library
+  of functions to make our lives easier. In future pages, expect the library code
+  to be sitting hidden on the page so that we can focus on our draw() function.
+  <p>Simply hit the "show library" button to review it at any time.""",
 "code": """//BEGIN LIBRARY CODE
 var x = 150;
 var y = 150;
@@ -313,15 +318,15 @@ init();
 {"name": "bounce",
 "title": "Bounce",
 "explain_before": """Our ball can fly, but it runs away too quickly; let's
-	contain it in our box by rebounding off the walls.""",
+  contain it in our box by rebounding off the walls.""",
 "code": """function draw() {
   clear();
   circle(x, y, 10);
  
   if (x + dx &gt; WIDTH || x + dx &lt; 0)
-	  dx = -dx;
+    dx = -dx;
   if (y + dy &gt; HEIGHT || y + dy &lt; 0)
-	  dy = -dy;
+    dy = -dy;
  
   x += dx;
   y += dy;
@@ -376,14 +381,15 @@ function draw() {
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
  
   if (x + dx > WIDTH || x + dx < 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy < 0)
-	  dy = -dy;
+    dy = -dy;
   else if (y + dy > HEIGHT) {
     if (x > paddlex && x < paddlex + paddlew)
       dy = -dy;
     else
+      //game over, so stop the animation
       clearInterval(intervalId);
   }
  
@@ -397,7 +403,7 @@ init();""",
     <p>
     The constants paddlex, paddleh, and paddlew will be hidden in the library
     from now on.""",
-"library": """var x = 150;
+"library": """var x = 140;
 var y = 150;
 var dx = 2;
 var dy = 4;
@@ -427,7 +433,7 @@ function clear() {
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
   intervalId = setInterval(draw, 10);
-	return intervalId;
+  return intervalId;
 }"""
 },
 {"name": "keyboard",
@@ -444,11 +450,13 @@ function init() {
 "code": """rightDown = false;
 leftDown = false;
 
+//set rightDown or leftDown if the right or left keys are down
 function onKeyDown(evt) {
   if (evt.keyCode == 39) rightDown = true;
   else if (evt.keyCode == 37) leftDown = true;
 }
 
+//and unset them when the right or left key is released
 function onKeyUp(evt) {
   if (evt.keyCode == 39) rightDown = false;
   else if (evt.keyCode == 37) leftDown = false;
@@ -461,15 +469,16 @@ function draw() {
   clear();
   circle(x, y, 10);
 
+  //move the paddle if left or right is currently pressed
   if (rightDown) paddlex += 5;
   else if (leftDown) paddlex -= 5;
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
  
   if (x + dx &gt; WIDTH || x + dx &lt; 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy &lt; 0)
-	  dy = -dy;
+    dy = -dy;
   else if (y + dy &gt; HEIGHT) {
     if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew)
       dy = -dy;
@@ -484,8 +493,8 @@ function draw() {
 init();""",
 "explain_after": """Now that we've got a working paddle, animation, and a bouncing ball,
         we've got something close to a game coming together.
-		<p>On the next page, we'll move support for the keyboard into the
-		library and add support for the mouse in a very similar manner.""",
+    <p>On the next page, we'll move support for the keyboard into the
+    library and add support for the mouse in a very similar manner.""",
 "library": """var x = 150;
 var y = 150;
 var dx = 2;
@@ -527,9 +536,7 @@ function init() {
 "explain_before": """Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
-    and move the paddle if it is.
-
-""",
+    and move the paddle if it is.""",
 "code": """var canvasMinX = $("#canvas").offset().left;
 var canvasMaxX = canvasMinX + $("#canvas").width();
 
@@ -540,7 +547,7 @@ function onMouseMove(evt) {
 }
 
 $(document).mousemove(onMouseMove);
-	   
+     
 function draw() {
   clear();
   circle(x, y, 10);
@@ -550,7 +557,7 @@ function draw() {
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
  
   if (x + dx &gt; WIDTH || x + dx &lt; 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy &lt; 0)
     dy = -dy;
@@ -567,12 +574,12 @@ function draw() {
 
 init();""",
 "explain_after": """Try changing the draw function so that the middle of the paddle is
-		located directly above the mouse pointer instead of the left side.
-		<p>Now that the keyboard and mouse work, all that's left to do is put in
+    located directly above the mouse pointer instead of the left side.
+    <p>Now that the keyboard and mouse work, all that's left to do is put in
     the bricks and add some design and code polish. As usual, we'll stuff all
     the code not in the draw() function into the library on all future pages.
 """,
-"library": """var x = 150;
+"library": """var x = 130;
 var y = 150;
 var dx = 2;
 var dy = 4;
@@ -630,9 +637,9 @@ function init() {
 {"name": "bricks",
 "title": "The Bricks",
 "explain_before": """Now we'll create a <a
-	href="http://www.webreference.com/programming/javascript/diaries/12/">2-dimensional
-	array</a> to hold bricks, use a couple loops to draw the ones that haven't
-	been broken, and make sure to remove bricks when they've been hit.
+  href="http://www.webreference.com/programming/javascript/diaries/12/">2-dimensional
+  array</a> to hold bricks, use a couple loops to draw the ones that haven't
+  been broken, and make sure to remove bricks when they've been hit.
 
 """,
 "code": """var bricks;
@@ -683,7 +690,7 @@ function draw() {
   }
  
   if (x + dx &gt; WIDTH || x + dx &lt; 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy &lt; 0)
     dy = -dy;
@@ -808,7 +815,7 @@ function draw() {
   }
  
   if (x + dx + ballr &gt; WIDTH || x + dx - ballr &lt; 0)
-	  dx = -dx;
+    dx = -dx;
 
   if (y + dy - ballr &lt; 0)
     dy = -dy;
@@ -925,4 +932,28 @@ function drawbricks() {
 }
 """
 },
+{"name":"coda",
+"title":"Coda",
+"explain_before": """That's it, Thanks for reading this far! The code presented
+here is cribbed mostly from a <a
+href="http://billmill.org/static/refresh-canvas/presentation/index-osf.html">presentation</a>
+I gave to <a href="http://refreshbmore.org/">Refresh Baltimore</a> in August, 2008.
+
+Some resources you may find helpful if you study canvas more:
+<ul><li>Mozilla's <a href="https://developer.mozilla.org/en/Drawing_Graphics_with_Canvas">
+canvas tutorial</a> is excellent, and much more comprehensive than this one.
+<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#the-canvas-element">The
+Spec</a>. Since it's currently in development, these features may or may not be
+available in current browsers.
+<li><a href="http://getfirebug.com/">Firebug</a> is an essential tool for any javascript
+developer.
+</ul>
+
+<p>You can find the code used to generate this tutorial (using the excellent <a
+href="http://www.makotemplates.org/">mako</a> template library) on <a
+href="http://github.com/llimllib/refresh-canvas/tree/master/tutorial">github</a>.
+
+<p>Feel free to <a href="mailto:bill.mill@gmail.com">drop me a line</a> if you have
+any comments or questions, or <a href="http://billmill.org">visit my blog</a>."""
+}
 ]

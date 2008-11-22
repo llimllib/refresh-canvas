@@ -1,5 +1,4 @@
 tasks:
-* change the color page to use bright breakout colors
 * make deployment work
   * write script
   * script references need to change

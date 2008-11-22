@@ -20,6 +20,7 @@ body { min-width: 750px;
 <%
     codebox_height = 26 + code.count("\n") * 15
     codebox_width = 700
+    librarybox_height = 26 + library.count("\n") * 15
 %>
 #codebox {border: 1px solid LightGray;
           width:${codebox_width+4}px;
@@ -27,11 +28,11 @@ body { min-width: 750px;
           margin-top: 10px;
           nothing: ${code};
 }
-#libraryContainer {border: 1px solid LightGray;
+/*#libraryContainer {border: 1px solid LightGray;
           width:${codebox_width+4}px;
           height:${codebox_height}px;
           margin-top: 10px;
-}
+}*/
 #textcontainer {font: 1.4em;
     margin-left: 320px;
     margin-right: 10px;
@@ -97,13 +98,13 @@ $(document).ready(function(){
           path: "codemirror/",
           stylesheet: "codemirror/jscolors.css",
           width: "${codebox_width}px",
-          height: "${codebox_height}px",
+          height: "${librarybox_height}px",
         });
     % endif
 
-    $("#textcontainer ul").tabs();
+    $("#textcontainer > ul").tabs();
     % if not library:
-        $("#textcontainer ul").tabs("remove", 1);
+        $("#textcontainer > ul").tabs("remove", 1);
     % endif
 });
   </script>
