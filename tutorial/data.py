@@ -1,5 +1,5 @@
 [{"name": "intro",
-"title": "intro",
+"title": "Introduction",
 "explain_before":  """What we're going to do in this tutorial is use the new 
    &lt;canvas&gt; element to create a simplified clone of the old Atari game
    <a href="http://billmill.org/static/refresh-canvas/presentation/pix/breakout_cover.jpg">Breakout</a>.
@@ -10,7 +10,7 @@
    This declaration creates the canvas on which we'll draw in the rest of the tutorial."""
  },
  {"name": "ball",
-"title": "ball",
+"title": "Draw a Circle",
 "explain_before": """Now that we've got a canvas to draw on, let's do so:""",
 "code": """//get a reference to the canvas
 var ctx = $('#canvas')[0].getContext("2d");
@@ -28,7 +28,7 @@ ctx.fill();""",
     for <code>fill()</code>."""
 },
 {"name": "color",
-"title": "color",
+"title": "Add Some Color",
 "explain_before": """We can also turn our ball different colors. Changing the value of
 	ctx.fillStyle will change the canvas' current color; we can set its value to a hex
 	string of the format <code>'#rrggbb'</code> or to a string 
@@ -60,7 +60,7 @@ ctx.fill();""",
 """
 },
 {"name": "move",
-"title": "move",
+"title": "Action",
 "explain_before": """Now that we've got a ball, let's make it move.
 	   In order to do so, we'll create a <code>draw()</code> function
 	   which wipes the screen, draws the ball, then updates its current
@@ -96,7 +96,7 @@ init();""",
 """
 },
 {"name": "library",
-"title": "library",
+"title": "Library: an Interlude",
 "explain_before": """Now that we're getting somewhere, our code's getting a bit
 	too big for a single screen, so we'll start sticking some of it into a library
 	of functions to make our lives easier. In future pages, expect the library code
@@ -151,7 +151,7 @@ init();
 "library": "//Nothing here just yet!"
 },
 {"name": "bounce",
-"title": "bounce",
+"title": "Bounce",
 "explain_before": """Our ball can fly! But it runs away too quickly; let's
 	contain it in our box by rebounding off the walls.""",
 "code": """function draw() {
@@ -202,7 +202,7 @@ function init() {
 }"""
 },
 {"name": "paddle",
-"title": "paddle",
+"title": "Add a Paddle",
 "explain_before": """Now we can start to think about making our game
   a bit like an actual game. Let's add a paddle, and only allow the
   ball to bounce off the bottom when it hits it.""",
@@ -271,7 +271,7 @@ function init() {
 }"""
 },
 {"name": "keyboard",
-"title": "keyboard",
+"title": "The Keyboard",
 "explain_before": """To add keyboard input to control our paddle, we need
   to do two things: find out when the left and right arrows have been
   pressed and move the paddle when they have.
@@ -363,7 +363,7 @@ function init() {
 }"""
 },
 {"name": "mouse",
-"title": "mouse",
+"title": "The Mouse",
 "explain_before": """Adding mouse support to our game is even simpler;
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
@@ -374,8 +374,7 @@ function init() {
 var canvasMaxX = canvasMinX + $("#canvas").width();
 
 function onMouseMove(evt) {
-  if (evt.pageX &gt; canvasMinX
-   &amp;&amp; evt.pageX &lt; canvasMaxX) {
+  if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
     paddlex = evt.pageX - canvasMinX;
   }
 }
@@ -469,7 +468,7 @@ function init() {
 }"""
 },
 {"name": "bricks",
-"title": "bricks",
+"title": "The Bricks",
 "explain_before": """Now we'll create a <a
 	href="http://www.webreference.com/programming/javascript/diaries/12/">2-dimensional
 	array</a> to hold bricks, use a couple loops to draw the ones that haven't
@@ -597,7 +596,140 @@ $(document).keyup(onKeyUp);
 
 function onMouseMove(evt) {
   if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
-    paddlex = evt.pageX - canvasMinX;
+    paddlex = evt.pageX - canvasMinX - (paddlew/2);
+  }
+}
+
+$(document).mousemove(onMouseMove);
+
+function init() {
+  ctx = $('#canvas')[0].getContext("2d");
+  canvasMinX = $("#canvas").offset().left;
+  canvasMaxX = canvasMinX + $("#canvas").width();
+  intervalId = setInterval(draw, 10);
+  return intervalId;
+}"""
+},
+{"name": "finish",
+"title": "Finishing Touches",
+"explain_before": """""",
+"code": """var bricks;
+var NROWS = 5;
+var NCOLS = 5;
+var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKHEIGHT = 15;
+var PADDING = 1;
+
+function initbricks() {
+    bricks = new Array(NROWS);
+    for (i=0; i &lt; NROWS; i++) {
+        bricks[i] = new Array(NCOLS);
+        for (j=0; j &lt; NCOLS; j++) {
+            bricks[i][j] = 1;
+        }
+    }
+}
+       
+function draw() {
+  clear();
+  circle(x, y, 10);
+
+  if (rightDown) paddlex += 5;
+  else if (leftDown) paddlex -= 5;
+  rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+
+  //draw bricks
+  for (i=0; i &lt; NROWS; i++) {
+    for (j=0; j &lt; NCOLS; j++) {
+      if (bricks[i][j] == 1) {
+        rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
+             (i * (BRICKHEIGHT + PADDING)) + PADDING,
+             BRICKWIDTH, BRICKHEIGHT);
+      }
+    }
+  }
+
+  //have we hit a brick?
+  rowheight = BRICKHEIGHT + PADDING;
+  colwidth = BRICKWIDTH + PADDING;
+  row = Math.floor(y/rowheight);
+  col = Math.floor(x/colwidth);
+  //if so, reverse the ball and mark the brick as broken
+  if (y &lt; NROWS * rowheight &amp;&amp; row &gt;= 0 &amp;&amp; col &gt;= 0 &amp;&amp; bricks[row][col] == 1) {
+    dy = -dy;
+    bricks[row][col] = 0;
+  }
+ 
+  if (x + dx &gt; WIDTH || x + dx &lt; 0)
+	  dx = -dx;
+
+  if (y + dy &lt; 0)
+    dy = -dy;
+  else if (y + dy &gt; HEIGHT) {
+    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew)
+      dy = -dy;
+    else
+      clearInterval(intervalId);
+  }
+ 
+  x += dx;
+  y += dy;
+}
+
+initbricks();
+init();
+""",
+"explain_after": """""",
+"library": """var x = 25;
+var y = 250;
+var dx = 1.5;
+var dy = -4;
+var ctx;
+var WIDTH = $("canvas").width()
+var HEIGHT = $("canvas").height()
+var paddlex = WIDTH / 2;
+var paddleh = 10;
+var paddlew = 75;
+var rightDown = false;
+var leftDown = false;
+var canvasMinX = 0;
+var canvasMaxX = 0;
+var intervalId = 0;
+
+function circle(x,y,r) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function rect(x,y,w,h) {
+  ctx.beginPath();
+  ctx.rect(x,y,w,h);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function clear() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+function onKeyDown(evt) {
+  if (evt.keyCode == 39) rightDown = true;
+  else if (evt.keyCode == 37) leftDown = true;
+}
+
+function onKeyUp(evt) {
+  if (evt.keyCode == 39) rightDown = false;
+  else if (evt.keyCode == 37) leftDown = false;
+}
+
+$(document).keydown(onKeyDown);
+$(document).keyup(onKeyUp);
+
+function onMouseMove(evt) {
+  if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
+    paddlex = evt.pageX - canvasMinX - (paddlew/2);
   }
 }
 
