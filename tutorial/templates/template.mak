@@ -106,6 +106,8 @@ $(document).ready(function(){
     % if not library:
         $("#textcontainer > ul").tabs("remove", 1);
     % endif
+
+	$("#runButton").click(runCode).removeAttr("disabled");
 });
   </script>
  </head>
@@ -121,7 +123,7 @@ $(document).ready(function(){
     <div id="canvascontainer">
          <canvas id="canvas" width="300" height="300"></canvas>
          <div style="text-align:center">
-             <input type="submit" value="run code" onclick="runCode()"/>
+             <input type="submit" value="run code" id="runButton" disabled/>
          </div>
 
          <ol id="toc">

@@ -5,8 +5,8 @@ clone that you can play in your browser, using javascript and the &lt;canvas&gt;
 <p>In order to use this tutorial, you'll need to have a relatively recent version
 of <a href="http://mozilla.com/firefox">Firefox</a>, <a
 href="http://apple.com/safari">Safari</a>, or <a href="http://opera.com">Opera</a>.
-You cannot use Internet Explorer, because they have decided not to implement the
-&lt;canvas&gt; element.
+You cannot use Internet Explorer, because Microsoft hss decided not to implement the
+&lt;canvas&gt; element in it.
 <p>Before you read any further, click on the "run code" button on the left to
 play the game that we'll end up creating.
 <p>On every page, you'll be able to click the "run code" button to run the code
@@ -313,7 +313,7 @@ init();
 "explain_after": """See how much simpler the draw() function is now?
 <p>If you edit the library, the changes will be reflected when you hit
 "run code", just like they are with the code box right now.""",
-"library": "//Nothing here just yet!"
+"library": "//Nothing here just yet! Check back on the next page."
 },
 {"name": "bounce",
 "title": "Bounce",
