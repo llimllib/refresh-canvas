@@ -57,6 +57,7 @@ function setColor(color) {
             eval(target + ' = "' + color + '";');
         }
     }
+    $("#curcolor").val(color);
     x = WIDTH/2;
     y = HEIGHT-20;
     dx = 1;
@@ -203,15 +204,19 @@ window.addEventListener('mousemove',mousemove,false)
      </td><td>
    <form>
          <div id="colorpicker"></div>
-         <input type="radio" name="elt" id="backColor" value="back">Background<br>
-         <input type="radio" name="elt" id="ballColor" value="ball">Ball<br>
-         <input type="radio" name="elt" id="paddleColor" value="paddle">Paddle<br>
-         <input type="radio" name="elt" id="row0" value="row0">Row 0<br>
-         <input type="radio" name="elt" id="row1" value="row1">Row 1<br>
-         <input type="radio" name="elt" id="row2" value="row2">Row 2<br>
-         <input type="radio" name="elt" id="row3" value="row3">Row 3<br>
-         <input type="radio" name="elt" id="row4" value="row4">Row 4<br>
+         <input type="radio" name="elt" id="backColor" value="back">Background</input><br>
+         <input type="radio" name="elt" id="ballColor" value="ball">Ball</input><br>
+         <input type="radio" name="elt" id="paddleColor" value="paddle">Paddle</input><br>
+         <input type="radio" name="elt" id="row0" value="row0">Row 0</input><br>
+         <input type="radio" name="elt" id="row1" value="row1">Row 1</input><br>
+         <input type="radio" name="elt" id="row2" value="row2">Row 2</input><br>
+         <input type="radio" name="elt" id="row3" value="row3">Row 3</input><br>
+         <input type="radio" name="elt" id="row4" value="row4">Row 4</input><br>
+         <input type="text" id="curcolor"></input><br>
     </form>
      </td></tr></table>
+    <textarea id="hiddenCode">this is text and text
+    and test
+    whit lots of code and stuff</textarea>
  </body>
 </html>

@@ -45,10 +45,10 @@ body { min-width: 750px;
 a:link { color: #333; }
 a:visited { color: #999; }
 h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
-	 margin-left: 10px;
+     margin-left: 10px;
 }
 #nextLink { float:right;
-	margin-right:30px
+    margin-right:30px
 }
 
     </style>
@@ -73,7 +73,11 @@ function runCode() {
     //if there's a library defined, eval it
     if (libEditor != undefined) eval(libEditor.getCode());
 
-    intervalID = eval(editor.getCode());
+    % if hidden_code:
+        intervalID = eval($("#hidden_code").val());
+    % else:
+        intervalID = eval(editor.getCode());
+    % endif
 }
 
 $(document).ready(function(){
@@ -105,6 +109,9 @@ $(document).ready(function(){
   </script>
  </head>
  <body>
+ % if hidden_code:
+     <textarea id="hidden_code" style="display:none">${hidden_code}</textarea>
+ % endif
  <div id="wrap">
    <!-- <div id="header">
    <h2>Breakout Tutorial</h2>
@@ -121,16 +128,10 @@ $(document).ready(function(){
                  <li><a href="${link}">${pagetitle}</a></li>
              % endfor
          </ol>
-         % if next:
-             <a href="${next}.html" id="nextLink">next</a>
-         % endif
-         % if prev:
-             <a href="${prev}.html" id="prevLink">prev</a><br>
-         % endif
     </div>
 
     <div id="textcontainer">
-		<h1>${title}</h1>
+        <h1>${title}</h1>
         <ul><li class="ui-tabs-nav-item"><a href="#explain"><span>Code</span></a></li>
             <li class="ui-tabs-nav-item"><a href="#libraryContainer"><span>Library</span></a></li>
             <li class="ui-tabs-nav-item"><a href="#comments"><span>Comments</span></a></li>
@@ -141,6 +142,13 @@ $(document).ready(function(){
                  <textarea id="code" rows=${code.count("\n")+1} cols=100>${code}</textarea>
                  </div>
                  <p>${explain_after}
+            % endif
+            <p>
+            % if next:
+                <a href="${next}.html" id="nextLink">next</a>
+            % endif
+            % if prev:
+                <a href="${prev}.html" id="prevLink">prev</a><br>
             % endif
         </div>
      
@@ -166,15 +174,15 @@ $(document).ready(function(){
 <script type="text/javascript">
 //<![CDATA[
 (function() {
-		var links = document.getElementsByTagName('a');
-		var query = '?';
-		for(var i = 0; i < links.length; i++) {
-			if(links[i].href.indexOf('#disqus_thread') >= 0) {
-				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-			}
-		}
-		document.write('<script type="text/javascript" src="http://disqus.com/forums/canvastutorial/get_num_replies.js' + query + '"></' + 'script>');
-	})();
+        var links = document.getElementsByTagName('a');
+        var query = '?';
+        for(var i = 0; i < links.length; i++) {
+            if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+            }
+        }
+        document.write('<script type="text/javascript" src="http://disqus.com/forums/canvastutorial/get_num_replies.js' + query + '"></' + 'script>');
+    })();
 <!-- end disqus block -->
 //]]>
 </script>

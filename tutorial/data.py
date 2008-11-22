@@ -1,17 +1,175 @@
-[{"name": "intro",
+[{"name": "index",
 "title": "Introduction",
-"explain_before":  """What we're going to do in this tutorial is use the new 
-   &lt;canvas&gt; element to create a simplified clone of the old Atari game
-   <a href="http://billmill.org/static/refresh-canvas/presentation/pix/breakout_cover.jpg">Breakout</a>.
-   The first thing we need to do is create an instance of the &lt;canvas&gt; element so that
+"explain_before": """Welcome! In this tutorial, we're going to create a breakout
+clone that you can play in your browser, using javascript and the canvas element.
+<p>Before you read any further, click on the "run code" button on the left to
+play the game that we'll end up creating.
+<p>On every page, you'll be able to click the "run code" button to run the code
+we've developed so far. Every page besides this one has an editor in it containing
+the javascript code that will be run in the same box as the game as soon as you
+click the button. You can make changes to the code, and see the results
+instantly by clicking the "run code" button.
+<p>In order to make our lives easier, I've included the <a
+href="http://jquery.com">jQuery</a> framework in every page, which extends
+javascript in your browser with some useful methods.
+<p>If you have any comments or questions, feel free to leave a comment on the
+"comments" tab.
+""",
+"hidden_code": """var x = 25;
+var y = 250;
+var dx = 1.5;
+var dy = -4;
+var ctx;
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
+var paddlex = WIDTH / 2;
+var paddleh = 10;
+var paddlew = 75;
+var rightDown = false;
+var leftDown = false;
+var canvasMinX = 0;
+var canvasMaxX = 0;
+var intervalId = 0;
+var bricks;
+var NROWS = 5;
+var NCOLS = 5;
+var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKHEIGHT = 15;
+var PADDING = 1;
+
+function init() {
+  ctx = $('#canvas')[0].getContext("2d");
+  canvasMinX = $("#canvas").offset().left;
+  canvasMaxX = canvasMinX + $("#canvas").width();
+  intervalId = setInterval(draw, 10);
+  return intervalId;
+}
+
+function circle(x,y,r) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function rect(x,y,w,h) {
+  ctx.beginPath();
+  ctx.rect(x,y,w,h);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function clear() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  rect(0,0,WIDTH,HEIGHT);
+}
+
+function onKeyDown(evt) {
+  if (evt.keyCode == 39) rightDown = true;
+  else if (evt.keyCode == 37) leftDown = true;
+}
+
+function onKeyUp(evt) {
+  if (evt.keyCode == 39) rightDown = false;
+  else if (evt.keyCode == 37) leftDown = false;
+}
+
+$(document).keydown(onKeyDown);
+$(document).keyup(onKeyUp);
+
+function onMouseMove(evt) {
+  if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
+    paddlex = Math.max(evt.pageX - canvasMinX - (paddlew/2), 0);
+    paddlex = Math.min(WIDTH - paddlew, paddlex);
+  }
+}
+
+$(document).mousemove(onMouseMove);
+
+function initbricks() {
+    bricks = new Array(NROWS);
+    for (i=0; i &lt; NROWS; i++) {
+        bricks[i] = new Array(NCOLS);
+        for (j=0; j &lt; NCOLS; j++) {
+            bricks[i][j] = 1;
+        }
+    }
+}
+
+function drawbricks() {
+  for (i=0; i &lt; NROWS; i++) {
+    ctx.fillStyle = rowcolors[i];
+    for (j=0; j &lt; NCOLS; j++) {
+      if (bricks[i][j] == 1) {
+        rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
+             (i * (BRICKHEIGHT + PADDING)) + PADDING,
+             BRICKWIDTH, BRICKHEIGHT);
+      }
+    }
+  }
+}
+
+var ballr = 10;
+var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
+var paddlecolor = "#FFFFFF";
+var ballcolor = "#FFFFFF";
+var backcolor = "#000000";
+
+function draw() {
+  ctx.fillStyle = backcolor;
+  clear();
+  ctx.fillStyle = ballcolor;
+  circle(x, y, ballr);
+
+  if (rightDown) paddlex += 5;
+  else if (leftDown) paddlex -= 5;
+  ctx.fillStyle = paddlecolor;
+  rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+
+  drawbricks();
+
+  //want to learn about real collision detection? go read
+  // http://www.harveycartel.org/metanet/tutorials/tutorialA.html
+  rowheight = BRICKHEIGHT + PADDING;
+  colwidth = BRICKWIDTH + PADDING;
+  row = Math.floor(y/rowheight);
+  col = Math.floor(x/colwidth);
+  //reverse the ball and mark the brick as broken
+  if (y &lt; NROWS * rowheight &amp;&amp; row &gt;= 0 &amp;&amp; col &gt;= 0 &amp;&amp; bricks[row][col] == 1) {
+    dy = -dy;
+    bricks[row][col] = 0;
+  }
+ 
+  if (x + dx + ballr &gt; WIDTH || x + dx - ballr &lt; 0)
+	  dx = -dx;
+
+  if (y + dy - ballr &lt; 0)
+    dy = -dy;
+  else if (y + dy + ballr &gt; HEIGHT - paddleh) {
+    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew) {
+      //move the ball differently based on where it hit the paddle
+      dx = 8 * ((x-(paddlex+paddlew/2))/paddlew);
+      dy = -dy;
+    }
+    else if (y + dy + ballr &gt; HEIGHT)
+      clearInterval(intervalId);
+  }
+ 
+  x += dx;
+  y += dy;
+}
+
+initbricks();
+init();"""
+},
+ {"name": "ball",
+"title": "Draw a Circle",
+"explain_before": """The first thing we need to do is create an instance of the &lt;canvas&gt; element so that
    we can start to draw on it. If you look in the source for this page, you'll see a 
    declaration that looks like this:<br />
    <pre>&lt;canvas id="canvas" width="300" height="300"&gt;&lt;/canvas&gt;</pre>
-   This declaration creates the canvas on which we'll draw in the rest of the tutorial."""
- },
- {"name": "ball",
-"title": "Draw a Circle",
-"explain_before": """Now that we've got a canvas to draw on, let's do so:""",
+   This declaration creates the canvas on which we'll draw in the rest of the tutorial.
+   <p>Now that we've got a canvas to draw on, let's do so:""",
 "code": """//get a reference to the canvas
 var ctx = $('#canvas')[0].getContext("2d");
 
@@ -37,20 +195,20 @@ ctx.fill();""",
 """,
 "code": """var ctx = $('#canvas')[0].getContext("2d");
 
-ctx.fillStyle = "#CCA68F";
+ctx.fillStyle = "#00A308";
 ctx.beginPath();
 ctx.arc(220, 220, 50, 0, Math.PI*2, true);
 ctx.closePath();
 ctx.fill();
 
-ctx.fillStyle = "#60BF60";
+ctx.fillStyle = "#FF1C0A";
 ctx.beginPath();
 ctx.arc(100, 100, 100, 0, Math.PI*2, true);
 ctx.closePath();
 ctx.fill();
 
 //the rectangle is half transparent
-ctx.fillStyle = "rgba(128, 104, 89, .5)"
+ctx.fillStyle = "rgba(255, 255, 0, .5)"
 ctx.beginPath();
 ctx.rect(15, 150, 120, 120);
 ctx.closePath();
@@ -61,7 +219,8 @@ ctx.fill();""",
 },
 {"name": "move",
 "title": "Action",
-"explain_before": """Now that we've got a ball, let's make it move.
+"explain_before": """We've already made a <a href="ball.html">ball</a>,
+       now let's make it move.
 	   In order to do so, we'll create a <code>draw()</code> function
 	   which wipes the screen, draws the ball, then updates its current
 	   position. We'll use a call to 
@@ -108,8 +267,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
@@ -146,13 +305,14 @@ function draw() {
 
 init();
 """,
-"explain_after": """See how much simpler the draw() function is now? Functionally,
-    everything should still work the same.""",
+"explain_after": """See how much simpler the draw() function is now?
+<p>If you edit the library, the changes will be reflected when you hit
+"run code", just like they are with the code box right now.""",
 "library": "//Nothing here just yet!"
 },
 {"name": "bounce",
 "title": "Bounce",
-"explain_before": """Our ball can fly! But it runs away too quickly; let's
+"explain_before": """Our ball can fly, but it runs away too quickly; let's
 	contain it in our box by rebounding off the walls.""",
 "code": """function draw() {
   clear();
@@ -175,8 +335,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -242,8 +402,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 var intervalId = 0;
 
 function circle(x,y,r) {
@@ -331,8 +491,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 var paddlex = WIDTH / 2;
 var paddleh = 10;
 var paddlew = 75;
@@ -417,8 +577,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 var paddlex = WIDTH / 2;
 var paddleh = 10;
 var paddlew = 75;
@@ -552,8 +712,8 @@ var y = 250;
 var dx = 1.5;
 var dy = -4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 var paddlex = WIDTH / 2;
 var paddleh = 10;
 var paddlew = 75;
@@ -612,63 +772,53 @@ function init() {
 },
 {"name": "finish",
 "title": "Finishing Touches",
-"explain_before": """""",
-"code": """var bricks;
-var NROWS = 5;
-var NCOLS = 5;
-var BRICKWIDTH = (WIDTH/NCOLS) - 1;
-var BRICKHEIGHT = 15;
-var PADDING = 1;
+"explain_before": """Now we'll add a few finishing touches to our game,
+like colors, and a more fun paddle collision equation. There's an
+infinite amount of improvements you could make, so go ahead and try them
+out.""",
+"code": """var ballr = 10;
+var rowcolors = ["#FF1C0A", "#FFFD0A", "#00A308", "#0008DB", "#EB0093"];
+var paddlecolor = "#FFFFFF";
+var ballcolor = "#FFFFFF";
+var backcolor = "#000000";
 
-function initbricks() {
-    bricks = new Array(NROWS);
-    for (i=0; i &lt; NROWS; i++) {
-        bricks[i] = new Array(NCOLS);
-        for (j=0; j &lt; NCOLS; j++) {
-            bricks[i][j] = 1;
-        }
-    }
-}
-       
 function draw() {
+  ctx.fillStyle = backcolor;
   clear();
-  circle(x, y, 10);
+  ctx.fillStyle = ballcolor;
+  circle(x, y, ballr);
 
   if (rightDown) paddlex += 5;
   else if (leftDown) paddlex -= 5;
+  ctx.fillStyle = paddlecolor;
   rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
 
-  //draw bricks
-  for (i=0; i &lt; NROWS; i++) {
-    for (j=0; j &lt; NCOLS; j++) {
-      if (bricks[i][j] == 1) {
-        rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
-             (i * (BRICKHEIGHT + PADDING)) + PADDING,
-             BRICKWIDTH, BRICKHEIGHT);
-      }
-    }
-  }
+  drawbricks();
 
-  //have we hit a brick?
+  //want to learn about real collision detection? go read
+  // http://www.harveycartel.org/metanet/tutorials/tutorialA.html
   rowheight = BRICKHEIGHT + PADDING;
   colwidth = BRICKWIDTH + PADDING;
   row = Math.floor(y/rowheight);
   col = Math.floor(x/colwidth);
-  //if so, reverse the ball and mark the brick as broken
+  //reverse the ball and mark the brick as broken
   if (y &lt; NROWS * rowheight &amp;&amp; row &gt;= 0 &amp;&amp; col &gt;= 0 &amp;&amp; bricks[row][col] == 1) {
     dy = -dy;
     bricks[row][col] = 0;
   }
  
-  if (x + dx &gt; WIDTH || x + dx &lt; 0)
+  if (x + dx + ballr &gt; WIDTH || x + dx - ballr &lt; 0)
 	  dx = -dx;
 
-  if (y + dy &lt; 0)
+  if (y + dy - ballr &lt; 0)
     dy = -dy;
-  else if (y + dy &gt; HEIGHT) {
-    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew)
+  else if (y + dy + ballr &gt; HEIGHT - paddleh) {
+    if (x &gt; paddlex &amp;&amp; x &lt; paddlex + paddlew) {
+      //move the ball differently based on where it hit the paddle
+      dx = 8 * ((x-(paddlex+paddlew/2))/paddlew);
       dy = -dy;
-    else
+    }
+    else if (y + dy + ballr &gt; HEIGHT)
       clearInterval(intervalId);
   }
  
@@ -685,8 +835,8 @@ var y = 250;
 var dx = 1.5;
 var dy = -4;
 var ctx;
-var WIDTH = $("canvas").width()
-var HEIGHT = $("canvas").height()
+var WIDTH = $("#canvas").width()
+var HEIGHT = $("#canvas").height()
 var paddlex = WIDTH / 2;
 var paddleh = 10;
 var paddlew = 75;
@@ -695,6 +845,20 @@ var leftDown = false;
 var canvasMinX = 0;
 var canvasMaxX = 0;
 var intervalId = 0;
+var bricks;
+var NROWS = 5;
+var NCOLS = 5;
+var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKHEIGHT = 15;
+var PADDING = 1;
+
+function init() {
+  ctx = $('#canvas')[0].getContext("2d");
+  canvasMinX = $("#canvas").offset().left;
+  canvasMaxX = canvasMinX + $("#canvas").width();
+  intervalId = setInterval(draw, 10);
+  return intervalId;
+}
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -712,6 +876,7 @@ function rect(x,y,w,h) {
 
 function clear() {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  rect(0,0,WIDTH,HEIGHT);
 }
 
 function onKeyDown(evt) {
@@ -729,18 +894,35 @@ $(document).keyup(onKeyUp);
 
 function onMouseMove(evt) {
   if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
-    paddlex = evt.pageX - canvasMinX - (paddlew/2);
+    paddlex = Math.max(evt.pageX - canvasMinX - (paddlew/2), 0);
+    paddlex = Math.min(WIDTH - paddlew, paddlex);
   }
 }
 
 $(document).mousemove(onMouseMove);
 
-function init() {
-  ctx = $('#canvas')[0].getContext("2d");
-  canvasMinX = $("#canvas").offset().left;
-  canvasMaxX = canvasMinX + $("#canvas").width();
-  intervalId = setInterval(draw, 10);
-  return intervalId;
-}"""
+function initbricks() {
+    bricks = new Array(NROWS);
+    for (i=0; i &lt; NROWS; i++) {
+        bricks[i] = new Array(NCOLS);
+        for (j=0; j &lt; NCOLS; j++) {
+            bricks[i][j] = 1;
+        }
+    }
+}
+
+function drawbricks() {
+  for (i=0; i &lt; NROWS; i++) {
+    ctx.fillStyle = rowcolors[i];
+    for (j=0; j &lt; NCOLS; j++) {
+      if (bricks[i][j] == 1) {
+        rect((j * (BRICKWIDTH + PADDING)) + PADDING, 
+             (i * (BRICKHEIGHT + PADDING)) + PADDING,
+             BRICKWIDTH, BRICKHEIGHT);
+      }
+    }
+  }
+}
+"""
 },
 ]

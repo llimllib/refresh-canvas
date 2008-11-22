@@ -2,6 +2,9 @@
 from glob import glob
 from mako.template import Template
 from mako.lookup import TemplateLookup
+import os
+
+for f in glob("*.html"): os.unlink(f)
 
 pages = eval(file("data.py").read())
 
@@ -15,7 +18,7 @@ for i, page in enumerate(pages):
     page["next"] = pages[i+1]["name"] if i+1 < len(pages) else ""
     page["toc"]  = toc
 
-    required(page, ["code", "explain_before", "explain_after", "title"])
+    required(page, ["code", "explain_before", "explain_after", "title", "hidden_code"])
     file(page['name'] + '.html', 'w').write(
         Template(filename="templates/template.mak",
                  lookup=TemplateLookup(directories=['.'])).render(**page))

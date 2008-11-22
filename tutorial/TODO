@@ -1,19 +1,5 @@
 tasks:
-* add explanatory links for those who want more info
-    * beginPath() and closePath()
-    * what setInterval(...) is
-* explain why/that we're using jQuery
-* need an intro page explaining how the tut works
-  * would sidebars underneath the canvas (in light yellow, maybe?)
-    be a good way to introduce such things?
-  * need to explain that basic familiarity with programming/javascript
-    are assumed
-  * the intro page should have the finished product that the user can play
 * change the color page to use bright breakout colors
-* style the header and footer
-* write top text for bricks
-* write the jazz page
-* better titles
 * make deployment work
   * write script
   * script references need to change
@@ -23,8 +9,3 @@ finishing checks:
 * make sure all variables are declared "var"
 * run spellcheck
 * make sure all programs function
-
-Qs:
-* how to have slide titles?
-* add an abort() button?
-* when/ever to talk about the stack nature of canvas?
