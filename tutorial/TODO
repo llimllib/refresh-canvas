@@ -8,6 +8,7 @@ tasks:
     be a good way to introduce such things?
   * need to explain that basic familiarity with programming/javascript
     are assumed
+  * the intro page should have the finished product that the user can play
 * change the color page to use bright breakout colors
 * style the header and footer
 * write top text for bricks
@@ -21,6 +22,7 @@ finishing checks:
 * make sure pages are valid HTML (all entities escaped, esp)
 * make sure all variables are declared "var"
 * run spellcheck
+* make sure all programs function
 
 Qs:
 * how to have slide titles?

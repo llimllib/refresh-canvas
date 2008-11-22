@@ -14,8 +14,9 @@ body { min-width: 750px;
                    width: 320px;
                    float: left;
                    position: fixed;
-                   font-size: 1.4em;
+                   font-size: 1.8em;
 }
+#explain { font-size: 1.4em; }
 <%
     codebox_height = 26 + code.count("\n") * 15
     codebox_width = 700
@@ -43,12 +44,19 @@ body { min-width: 750px;
 #libraryBox { border: 1px solid DarkGray; }
 a:link { color: #333; }
 a:visited { color: #999; }
+h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
+	 margin-left: 10px;
+}
+#nextLink { float:right;
+	margin-right:30px
+}
+
     </style>
     <script type="text/javascript" src="jquery-1.2.6.js"></script>
     <script type="text/javascript" src="jquery-ui-1.6rc2.js"></script>
     <link rel="stylesheet" href="theme/ui-theme.css" type="text/css" media="screen">
     <script type="text/javascript" src="codemirror/codemirror.js"></script>
-    <title>Canvas Tutorial</title>
+    <title>Canvas Tutorial - ${title}</title>
 <script type="text/javascript">
 var editor = undefined;
 var libEditor = undefined;
@@ -63,7 +71,7 @@ function runCode() {
       $("#canvas")[0].height);
 
     //if there's a library defined, eval it
-    if (libEditor != undefined) eval(editor.getCode());
+    if (libEditor != undefined) eval(libEditor.getCode());
 
     intervalID = eval(editor.getCode());
 }
@@ -108,21 +116,21 @@ $(document).ready(function(){
              <input type="submit" value="run code" onclick="runCode()"/>
          </div>
 
+         <ol id="toc">
+             % for pagetitle, link in toc:
+                 <li><a href="${link}">${pagetitle}</a></li>
+             % endfor
+         </ol>
          % if next:
-             <a href="${next}.html" id="nextLink" style="float:right; margin-right:20px">next</a>
+             <a href="${next}.html" id="nextLink">next</a>
          % endif
          % if prev:
              <a href="${prev}.html" id="prevLink">prev</a><br>
          % endif
-
-         <ol id="toc">
-             % for title, link in toc:
-                 <li><a href="${link}">${title}</a></li>
-             % endfor
-         </ol>
     </div>
 
     <div id="textcontainer">
+		<h1>${title}</h1>
         <ul><li class="ui-tabs-nav-item"><a href="#explain"><span>Code</span></a></li>
             <li class="ui-tabs-nav-item"><a href="#libraryContainer"><span>Library</span></a></li>
             <li class="ui-tabs-nav-item"><a href="#comments"><span>Comments</span></a></li>
