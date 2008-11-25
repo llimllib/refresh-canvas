@@ -172,7 +172,6 @@ $(document).ready(function(){
     </div>
 
 <!-- begin disqus block -->
-<!-- this may only work on billmill.org/static/canvastutorial -->
 <script type="text/javascript">
 //<![CDATA[
 (function() {
