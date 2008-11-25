@@ -265,7 +265,7 @@ init();""",
   too big for a single screen, so we'll start sticking some of it into a library
   of functions to make our lives easier. In future pages, expect the library code
   to be sitting hidden on the page so that we can focus on our draw() function.
-  <p>Simply hit the "show library" button to review it at any time.""",
+  <p>Just click on the library tab to review it at any time.""",
 "code": """//BEGIN LIBRARY CODE
 var x = 150;
 var y = 150;
@@ -948,6 +948,12 @@ available in current browsers.
 <li><a href="http://getfirebug.com/">Firebug</a> is an essential tool for any javascript
 developer.
 </ul>
+
+<p>Innumerable thanks to <a 
+href="http://marijn.haverbeke.nl/codemirror/">codemirror</a> for the awesome 
+text editor in use all over this tutorial, and to <a 
+href="http://jquery.com/">jQuery</a> and <a href="http://ui.jquery.com/">jQuery 
+UI</a> for making my life much easier.
 
 <p>You can find the code used to generate this tutorial (using the excellent <a
 href="http://www.makotemplates.org/">mako</a> template library) on <a

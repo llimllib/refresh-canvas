@@ -26,7 +26,6 @@ body { min-width: 750px;
           width:${codebox_width+4}px;
           height:${codebox_height}px;
           margin-top: 10px;
-          nothing: ${code};
 }
 /*#libraryContainer {border: 1px solid LightGray;
           width:${codebox_width+4}px;

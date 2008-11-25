@@ -29,10 +29,10 @@ def build():
                      lookup=TemplateLookup(directories=['.'])).render(**page))
 
 def deploy():
+    print "deploying"
     for f in ['*.html', '*.js', 'theme', 'codemirror']:
         cmd = 'scp -r %(f)s billmill.org:~/static/canvastutorial' % locals()
         p = Popen(cmd, shell=True, stderr=PIPE)
-        # you need to "chmod a+r *" everything in the remote directory... sigh
 
 if __name__ == "__main__":
     clean()
