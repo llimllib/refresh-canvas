@@ -25,9 +25,9 @@ var y = 250;
 var dx = 1.5;
 var dy = -4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
-var paddlex = WIDTH / 2;
+var WIDTH;
+var HEIGHT;
+var paddlex;
 var paddleh = 10;
 var paddlew = 75;
 var rightDown = false;
@@ -38,14 +38,18 @@ var intervalId = 0;
 var bricks;
 var NROWS = 5;
 var NCOLS = 5;
-var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKWIDTH;
 var BRICKHEIGHT = 15;
 var PADDING = 1;
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width();
+  HEIGHT = $("#canvas").height();
+  BRICKWIDTH = (WIDTH/NCOLS) - 1;
+  paddlex = WIDTH / 2;
   canvasMinX = $("#canvas").offset().left;
-  canvasMaxX = canvasMinX + $("#canvas").width();
+  canvasMaxX = canvasMinX + WIDTH;
   intervalId = setInterval(draw, 10);
   return intervalId;
 }
@@ -271,12 +275,14 @@ var x = 150;
 var y = 150;
 var dx = 2;
 var dy = 4;
+var WIDTH;
+var HEIGHT;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width();
+  HEIGHT = $("#canvas").height();
   return setInterval(draw, 10);
 }
 
@@ -340,8 +346,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
+var WIDTH; 
+var HEIGHT;
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -363,6 +369,8 @@ function clear() {
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()
   return setInterval(draw, 10);
 }"""
 },
@@ -408,8 +416,8 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
+var WIDTH;
+var HEIGHT;
 var intervalId = 0;
 
 function circle(x,y,r) {
@@ -432,6 +440,8 @@ function clear() {
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()
   intervalId = setInterval(draw, 10);
   return intervalId;
 }"""
@@ -500,9 +510,9 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
-var paddlex = WIDTH / 2;
+var WIDTH;
+var HEIGHT;
+var paddlex;
 var paddleh = 10;
 var paddlew = 75;
 var intervalId = 0;
@@ -527,6 +537,9 @@ function clear() {
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()
+  paddlex = WIDTH / 2;
   intervalId = setInterval(draw, 10);
   return intervalId;
 }"""
@@ -538,7 +551,7 @@ function init() {
     function, see if the mouse is within the borders of the game,
     and move the paddle if it is.""",
 "code": """var canvasMinX = $("#canvas").offset().left;
-var canvasMaxX = canvasMinX + $("#canvas").width();
+var canvasMaxX = canvasMinX + WIDTH;
 
 function onMouseMove(evt) {
   if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
@@ -584,9 +597,9 @@ var y = 150;
 var dx = 2;
 var dy = 4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
-var paddlex = WIDTH / 2;
+var WIDTH;
+var HEIGHT;
+var paddlex;
 var paddleh = 10;
 var paddlew = 75;
 var rightDown = false;
@@ -628,8 +641,11 @@ $(document).keyup(onKeyUp);
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()
+  paddlex = WIDTH / 2;
   canvasMinX = $("#canvas").offset().left;
-  canvasMaxX = canvasMinX + $("#canvas").width();
+  canvasMaxX = canvasMinX + WIDTH;
   intervalId = setInterval(draw, 10);
   return intervalId;
 }"""
@@ -719,9 +735,9 @@ var y = 250;
 var dx = 1.5;
 var dy = -4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
-var paddlex = WIDTH / 2;
+var WIDTH;
+var HEIGHT;
+var paddlex;
 var paddleh = 10;
 var paddlew = 75;
 var rightDown = false;
@@ -771,8 +787,11 @@ $(document).mousemove(onMouseMove);
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width()
+  HEIGHT = $("#canvas").height()
+  paddlex = WIDTH / 2;
   canvasMinX = $("#canvas").offset().left;
-  canvasMaxX = canvasMinX + $("#canvas").width();
+  canvasMaxX = canvasMinX + WIDTH;
   intervalId = setInterval(draw, 10);
   return intervalId;
 }"""
@@ -842,9 +861,9 @@ var y = 250;
 var dx = 1.5;
 var dy = -4;
 var ctx;
-var WIDTH = $("#canvas").width()
-var HEIGHT = $("#canvas").height()
-var paddlex = WIDTH / 2;
+var WIDTH;
+var HEIGHT;
+var paddlex;
 var paddleh = 10;
 var paddlew = 75;
 var rightDown = false;
@@ -855,14 +874,18 @@ var intervalId = 0;
 var bricks;
 var NROWS = 5;
 var NCOLS = 5;
-var BRICKWIDTH = (WIDTH/NCOLS) - 1;
+var BRICKWIDTH;
 var BRICKHEIGHT = 15;
 var PADDING = 1;
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
+  WIDTH = $("#canvas").width();
+  HEIGHT = $("#canvas").height();
+  paddlex = WIDTH / 2;
+  BRICKWIDTH = (WIDTH/NCOLS) - 1;
   canvasMinX = $("#canvas").offset().left;
-  canvasMaxX = canvasMinX + $("#canvas").width();
+  canvasMaxX = canvasMinX + WIDTH;
   intervalId = setInterval(draw, 10);
   return intervalId;
 }
