@@ -168,8 +168,8 @@ function draw() {
   y += dy;
 }
 
-initbricks();
-init();"""
+init();
+initbricks();"""
 },
  {"name": "ball",
 "title": "Draw a Circle",
@@ -379,9 +379,15 @@ function init() {
 "explain_before": """Now we can start to think about making our game
   a bit like an actual game. Let's add a paddle, and only allow the
   ball to bounce off the bottom when it hits it.""",
-"code": """paddlex = WIDTH / 2;
-paddleh = 10;
-paddlew = 75;
+"code": """var paddlex;
+var paddleh;
+var paddlew;
+
+function init_paddle() {
+  paddlex = WIDTH / 2;
+  paddleh = 10;
+  paddlew = 75;
+}
 
 function draw() {
   clear();
@@ -405,12 +411,13 @@ function draw() {
   y += dy;
 }
 
-init();""",
+init();
+init_paddle();""",
 "explain_after": """You probably want to be able to move the paddle - we'll cover that in
     the next page.
     <p>
-    The constants paddlex, paddleh, and paddlew will be hidden in the library
-    from now on.""",
+    The constants paddlex, paddleh, and paddlew will be moved to the regular init()
+    function from now on.""",
 "library": """var x = 140;
 var y = 150;
 var dx = 2;
@@ -550,8 +557,13 @@ function init() {
     all we have to do is send the mousemove event to an onMouseMove
     function, see if the mouse is within the borders of the game,
     and move the paddle if it is.""",
-"code": """var canvasMinX = $("#canvas").offset().left;
-var canvasMaxX = canvasMinX + WIDTH;
+"code": """var canvasMinX;
+var canvasMaxX;
+
+function init_mouse() {
+  canvasMinX = $("#canvas").offset().left;
+  canvasMaxX = canvasMinX + WIDTH;
+}
 
 function onMouseMove(evt) {
   if (evt.pageX &gt; canvasMinX &amp;&amp; evt.pageX &lt; canvasMaxX) {
@@ -585,7 +597,8 @@ function draw() {
   y += dy;
 }
 
-init();""",
+init();
+init_mouse();""",
 "explain_after": """Try changing the draw function so that the middle of the paddle is
     located directly above the mouse pointer instead of the left side.
     <p>Now that the keyboard and mouse work, all that's left to do is put in
@@ -659,20 +672,26 @@ function init() {
 
 """,
 "code": """var bricks;
-var NROWS = 5;
-var NCOLS = 5;
-var BRICKWIDTH = (WIDTH/NCOLS) - 1;
-var BRICKHEIGHT = 15;
-var PADDING = 1;
+var NROWS;
+var NCOLS;
+var BRICKWIDTH;
+var BRICKHEIGHT;
+var PADDING;
 
 function initbricks() {
-    bricks = new Array(NROWS);
-    for (i=0; i &lt; NROWS; i++) {
-        bricks[i] = new Array(NCOLS);
-        for (j=0; j &lt; NCOLS; j++) {
-            bricks[i][j] = 1;
-        }
+  NROWS = 5;
+  NCOLS = 5;
+  BRICKWIDTH = (WIDTH/NCOLS) - 1;
+  BRICKHEIGHT = 15;
+  PADDING = 1;
+
+  bricks = new Array(NROWS);
+  for (i=0; i &lt; NROWS; i++) {
+    bricks[i] = new Array(NCOLS);
+    for (j=0; j &lt; NCOLS; j++) {
+      bricks[i][j] = 1;
     }
+  }
 }
        
 function draw() {
@@ -721,9 +740,8 @@ function draw() {
   y += dy;
 }
 
-initbricks();
 init();
-""",
+initbricks();""",
 "explain_after": """Try adding code to make the ball bounce in different directions
     based on where it hits the paddle.
     <p>It seems at every step as if what we have is getting closer to
@@ -852,9 +870,8 @@ function draw() {
   y += dy;
 }
 
-initbricks();
 init();
-""",
+initbricks();""",
 "explain_after": """""",
 "library": """var x = 25;
 var y = 250;
