@@ -4,6 +4,7 @@ from mako.template import Template
 from mako.lookup import TemplateLookup
 from sys import argv
 from os import unlink
+from os import path
 from subprocess import Popen, PIPE
 
 def clean():
@@ -24,7 +25,7 @@ def build():
 
         required(page, ["code", "explain_before", "explain_after", "title", "hidden_code",
                         "library"])
-        file(page['name'] + '.html', 'w').write(
+        file(path.join('build', page['name'] + '.html'), 'w').write(
             Template(filename="templates/template.mak",
                      lookup=TemplateLookup(directories=['.'])).render(**page))
 
