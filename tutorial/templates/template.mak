@@ -52,9 +52,13 @@ h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
 }
 
     </style>
-    <script type="text/javascript" src="jquery-1.2.6.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.6rc2.js"></script>
+
+
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery-linedtextarea.js"></script>
     <link rel="stylesheet" href="theme/ui-theme.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="theme/jquery-linedtextarea.css" type="text/css" media="screen">
     <script type="text/javascript" src="codemirror/codemirror.js"></script>
     <title>Canvas Tutorial - ${title}</title>
 <script type="text/javascript">
@@ -82,6 +86,7 @@ function runCode() {
 
 $(document).ready(function(){
     % if code:
+		$("#code").linedtextarea();
         editor = CodeMirror.fromTextArea("code", {
           parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
           path: "codemirror/",
@@ -92,6 +97,7 @@ $(document).ready(function(){
     % endif
     
     % if library:
+		$("#library").linedtextarea();
         libEditor = CodeMirror.fromTextArea("library", {
           parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
           path: "codemirror/",
@@ -101,9 +107,9 @@ $(document).ready(function(){
         });
     % endif
 
-    $("#textcontainer > ul").tabs();
+    $("#textcontainer").tabs();
     % if not library:
-        $("#textcontainer > ul").tabs("remove", 1);
+        $("#textcontainerl").tabs("remove", 1);
     % endif
 
 	$("#runButton").click(runCode).removeAttr("disabled");
