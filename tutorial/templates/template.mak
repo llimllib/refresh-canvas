@@ -31,6 +31,9 @@ body {
     border: 1px solid LightGray;
     margin-top: 10px;
 }
+#libraryBox {
+    height:${librarybox_height}px;
+}
 #libraryContainer {
     border: 1px solid LightGray;
     margin-top: 10px;
@@ -107,15 +110,21 @@ $(document).ready(function(){
           mode: "javascript",
           lineNumbers: true,
         });
-        libEditor.refresh();
     % endif
 
     $("#tabs").tabs();
     % if not library:
-        $(".tabs").tabs("remove", 1);
+        $("#tabs").tabs("remove", 1);
     % endif
 
-  $("#runButton").click(runCode).removeAttr("disabled");
+    $("#tabs").bind("tabsselect", function(evt, ui) {
+        if (libEditor) {
+            libEditor.refresh();
+        }
+        console.log("here");
+    });
+
+    $("#runButton").click(runCode).removeAttr("disabled");
 });
   </script>
  </head>
