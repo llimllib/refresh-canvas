@@ -4,6 +4,8 @@ from mako.template import Template
 from mako.lookup import TemplateLookup
 from sys import argv
 from os import unlink
+from os.path import join, isdir
+from shutil import copytree, rmtree
 from subprocess import Popen, PIPE
 
 def clean():
@@ -24,14 +26,18 @@ def build():
 
         required(page, ["code", "explain_before", "explain_after", "title", "hidden_code",
                         "library"])
-        file(page['name'] + '.html', 'w').write(
+        file(join("build", page['name'] + '.html'), 'w').write(
             Template(filename="templates/template.mak",
                      lookup=TemplateLookup(directories=['.'])).render(**page))
 
+    if isdir("build/js"):
+        rmtree("build/js")
+    copytree("js", "build/js")
+
 def deploy():
     print "deploying"
-    for f in ['*.html', '*.js', 'theme', 'codemirror']:
-        cmd = 'scp -r %(f)s billmill.org:~/static/canvastutorial' % locals()
+    for f in ['build/*.html', 'js']:
+        cmd = "rsync -avuz -e ssh %s llimllib@billmill.org:~/static/canvastutorial" % f
         p = Popen(cmd, shell=True, stderr=PIPE)
 
 if __name__ == "__main__":
