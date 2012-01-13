@@ -3,7 +3,7 @@ from glob import glob
 from mako.template import Template
 from mako.lookup import TemplateLookup
 from sys import argv
-from os import unlink
+from os import unlink, mkdir
 from os.path import join, isdir
 from shutil import copytree, rmtree
 from subprocess import Popen, PIPE
@@ -12,6 +12,9 @@ def clean():
     for f in glob("*.html"): unlink(f)
 
 def build():
+    if not isdir("build"):
+        mkdir("build")
+
     pages = eval(file("data.py").read())
 
     def required(page, required_vars):
