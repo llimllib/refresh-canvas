@@ -24,7 +24,7 @@ body {
 <%
     codebox_height = 26 + code.count("\n") * 18
     codebox_width = 700
-    librarybox_height = 26 + library.count("\n") * 15
+    librarybox_height = 26 + library.count("\n") * 18
 %>
 #codebox {
     height:${codebox_height}px;
@@ -58,17 +58,17 @@ h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
 
     </style>
     <!-- jquery -->
-    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
     <!-- jquery UI -->
-    <link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.17.custom.css" rel="Stylesheet" />	
-    <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.17.custom.min.js"></script>
+    <link type="text/css" href="js/jquery-ui/css/smoothness/jquery-ui-1.8.17.custom.css" rel="Stylesheet" />	
+    <script type="text/javascript" src="js/jquery-ui/js/jquery-ui-1.8.17.custom.min.js"></script>
 
     <!-- CodeMirror -->
-    <script type="text/javascript" src="CodeMirror-2.11/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="CodeMirror-2.11/lib/codemirror.css">
-    <link rel="stylesheet" href="CodeMirror-2.11/theme/default.css">
-    <script src="CodeMirror-2.11/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="js/CodeMirror-2.11/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="js/CodeMirror-2.11/lib/codemirror.css">
+    <link rel="stylesheet" href="js/CodeMirror-2.11/theme/default.css">
+    <script src="js/CodeMirror-2.11/mode/javascript/javascript.js"></script>
 
     <title>Canvas Tutorial - ${title}</title>
 <script type="text/javascript">
