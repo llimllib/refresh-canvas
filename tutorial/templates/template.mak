@@ -1,38 +1,43 @@
 <html>
  <head>
   <style type="text/css">
-body, html {margin:0;
-            padding:0;
-            background:white;
-            color:#000;
+body, html {
+    margin:0;
+    padding:0;
+    background:white;
+    color:#000;
 }
-body { min-width: 750px; 
-       font-size: 62.5%;}
+body {
+    min-width: 750px; 
+    font-size: 62.5%;
+}
 #wrap { margin:0 auto; width:100%; }
-#canvascontainer { margin-left: 5px;
-                   margin-top: 5px;
-                   width: 320px;
-                   float: left;
-                   position: fixed;
-                   font-size: 1.8em;
+#canvascontainer {
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 320px;
+    float: left;
+    position: fixed;
+    font-size: 1.8em;
 }
 #explain { font-size: 1.4em; }
 <%
-    codebox_height = 26 + code.count("\n") * 15
+    codebox_height = 26 + code.count("\n") * 18
     codebox_width = 700
     librarybox_height = 26 + library.count("\n") * 15
 %>
-#codebox {border: 1px solid LightGray;
-          width:${codebox_width+4}px;
-          height:${codebox_height}px;
-          margin-top: 10px;
+#codebox {
+    height:${codebox_height}px;
+    border: 1px solid LightGray;
+    margin-top: 10px;
 }
-/*#libraryContainer {border: 1px solid LightGray;
-          width:${codebox_width+4}px;
-          height:${codebox_height}px;
-          margin-top: 10px;
-}*/
-#textcontainer {font: 1.4em;
+#libraryContainer {
+    border: 1px solid LightGray;
+    margin-top: 10px;
+    font-size: 1.4em;
+}
+#textcontainer {
+    font-size: 1.4em;
     margin-left: 320px;
     margin-right: 10px;
     margin-top:   10px;
@@ -52,10 +57,19 @@ h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
 }
 
     </style>
-    <script type="text/javascript" src="jquery-1.2.6.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.6rc2.js"></script>
-    <link rel="stylesheet" href="theme/ui-theme.css" type="text/css" media="screen">
-    <script type="text/javascript" src="codemirror/codemirror.js"></script>
+    <!-- jquery -->
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+
+    <!-- jquery UI -->
+    <link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.17.custom.css" rel="Stylesheet" />	
+    <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.17.custom.min.js"></script>
+
+    <!-- CodeMirror -->
+    <script type="text/javascript" src="CodeMirror-2.11/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="CodeMirror-2.11/lib/codemirror.css">
+    <link rel="stylesheet" href="CodeMirror-2.11/theme/default.css">
+    <script src="CodeMirror-2.11/mode/javascript/javascript.js"></script>
+
     <title>Canvas Tutorial - ${title}</title>
 <script type="text/javascript">
 var editor = undefined;
@@ -82,31 +96,26 @@ function runCode() {
 
 $(document).ready(function(){
     % if code:
-        editor = CodeMirror.fromTextArea("code", {
-          parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-          path: "codemirror/",
-          stylesheet: "codemirror/jscolors.css",
-          width: "${codebox_width}px",
-          height: "${codebox_height}px",
+        editor = CodeMirror.fromTextArea($("#code").get(0), {
+          mode: "javascript",
+          lineNumbers: true,
         });
     % endif
     
     % if library:
-        libEditor = CodeMirror.fromTextArea("library", {
-          parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-          path: "codemirror/",
-          stylesheet: "codemirror/jscolors.css",
-          width: "${codebox_width}px",
-          height: "${librarybox_height}px",
+        libEditor = CodeMirror.fromTextArea($("#library").get(0), {
+          mode: "javascript",
+          lineNumbers: true,
         });
+        libEditor.refresh();
     % endif
 
-    $("#textcontainer > ul").tabs();
+    $("#tabs").tabs();
     % if not library:
-        $("#textcontainer > ul").tabs("remove", 1);
+        $(".tabs").tabs("remove", 1);
     % endif
 
-	$("#runButton").click(runCode).removeAttr("disabled");
+  $("#runButton").click(runCode).removeAttr("disabled");
 });
   </script>
  </head>
@@ -134,40 +143,43 @@ $(document).ready(function(){
 
     <div id="textcontainer">
         <h1>${title}</h1>
-        <ul><li class="ui-tabs-nav-item"><a href="#explain"><span>Code</span></a></li>
-            <li class="ui-tabs-nav-item"><a href="#libraryContainer"><span>Library</span></a></li>
-            <li class="ui-tabs-nav-item"><a href="#comments"><span>Comments</span></a></li>
-        </ul>
-        <div id="explain">${explain_before}
-            % if code:
-                 <div id="codebox">
-                 <textarea id="code" rows=${code.count("\n")+1} cols=100>${code}</textarea>
-                 </div>
-                 <p>${explain_after}
-            % endif
-            <p>
-            % if next:
-                <a href="${next}.html" id="nextLink">next</a>
-            % endif
-            % if prev:
-                <a href="${prev}.html" id="prevLink">prev</a><br>
-            % endif
-        </div>
-     
-        <div id="libraryContainer">
-            % if library:
-                <div id="libraryBox">
-                    <textarea id="library" rows=${library.count("\n")+1}
-                              cols=100>${library}</textarea>
-                </div>
-            % endif
-        </div>
+        <div id="tabs">
+            <ul>
+            <li><a href="#explain"><span>Code</span></a></li>
+            <li><a href="#libraryContainer"><span>Library</span></a></li>
+            <li><a href="#comments"><span>Comments</span></a></li>
+            </ul>
+            <div id="explain">${explain_before}
+                % if code:
+                     <div id="codebox">
+                     <textarea id="code">${code}</textarea>
+                     </div>
+                     <p>${explain_after}
+                % endif
+                <p>
+                % if next:
+                    <a href="${next}.html" id="nextLink">next</a>
+                % endif
+                % if prev:
+                    <a href="${prev}.html" id="prevLink">prev</a><br>
+                % endif
+            </div>
 
-        <div id="comments">
-<!-- begin disqus block -->
-<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/canvastutorial/embed.js"></script><noscript><a href="http://canvastutorial.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-<!-- end disqus block -->
-        
+            <div id="libraryContainer">
+                % if library:
+                    <div id="libraryBox">
+                        <textarea id="library" rows=${library.count("\n")+1}
+                                  cols=100>${library}</textarea>
+                    </div>
+                % endif
+            </div>
+
+            <div id="comments">
+    <!-- begin disqus block -->
+    <div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/canvastutorial/embed.js"></script><noscript><a href="http://canvastutorial.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!-- end disqus block -->
+
+            </div>
         </div>
     </div>
 
