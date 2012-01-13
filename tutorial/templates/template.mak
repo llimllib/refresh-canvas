@@ -85,12 +85,12 @@ function runCode() {
       $("#canvas")[0].height);
 
     //if there's a library defined, eval it
-    if (libEditor != undefined) eval(libEditor.getCode());
+    if (libEditor != undefined) eval(libEditor.getValue());
 
     % if hidden_code:
         intervalID = eval($("#hidden_code").val());
     % else:
-        intervalID = eval(editor.getCode());
+        intervalID = eval(editor.getValue());
     % endif
 }
 
