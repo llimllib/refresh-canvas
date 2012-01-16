@@ -1,0 +1,67 @@
+order: 4
+
+code: |
+  //BEGIN LIBRARY CODE
+  var x = 150;
+  var y = 150;
+  var dx = 2;
+  var dy = 4;
+  var WIDTH;
+  var HEIGHT;
+  var ctx;
+  
+  function init() {
+    ctx = $('#canvas')[0].getContext("2d");
+    WIDTH = $("#canvas").width();
+    HEIGHT = $("#canvas").height();
+    return setInterval(draw, 10);
+  }
+  
+  function circle(x,y,r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2, true);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  function rect(x,y,w,h) {
+    ctx.beginPath();
+    ctx.rect(x,y,w,h);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  function clear() {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  }
+  
+  //END LIBRARY CODE
+  
+  function draw() {
+    clear();
+    circle(x, y, 10);
+   
+    x += dx;
+    y += dy;
+  }
+  
+  init();
+  
+
+name: 'library'
+
+title: 'Library: an Interlude'
+
+library: '//Nothing here just yet! Check back on the next page.'
+
+explain_before: |
+  Now that we're getting somewhere, our code's getting a bit
+    too big for a single screen, so we'll start sticking some of it into a library
+    of functions to make our lives easier. In future pages, expect the library code
+    to be sitting hidden on the page so that we can focus on our draw() function.
+    <p>Just click on the library tab to review it at any time.
+
+explain_after: |
+  See how much simpler the draw() function is now?
+  <p>If you edit the library, the changes will be reflected when you hit
+  "run code", just like they are with the code box right now.
