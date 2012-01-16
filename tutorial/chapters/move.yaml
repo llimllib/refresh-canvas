@@ -1,0 +1,45 @@
+order: 3
+
+code: |
+  var x = 150;
+  var y = 150;
+  var dx = 2;
+  var dy = 4;
+  var ctx;
+  
+  function init() {
+    ctx = $('#canvas')[0].getContext("2d");
+    return setInterval(draw, 10);
+  }
+  
+  function draw() {
+    ctx.clearRect(0,0,300,300);
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI*2, true); 
+    ctx.closePath();
+    ctx.fill();
+    x += dx;
+    y += dy;
+  }
+  
+  init();
+
+explain_before: |
+  We've already made a <a href="ball.html">ball</a>,
+         now let's make it move.
+       In order to do so, we'll create a <code>draw()</code> function
+       which wipes the screen, draws the ball, then updates its current
+       position. We'll use a call to 
+       <code>setInterval(function, timeout)</code> in the <code>init()</code>
+       function to tell the browser to run our draw function every 10
+       milliseconds, creating the illusion of movement.
+
+explain_after: |
+  Try changing the dx and dy values to change the direction of the ball,
+          or change the x and y variables to change where the ball will start.
+      Make sure to try negative values for dx and dy.
+  
+
+name: 'move'
+
+title: 'Action'

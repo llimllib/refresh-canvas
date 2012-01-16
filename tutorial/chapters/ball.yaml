@@ -1,0 +1,31 @@
+order: 1
+
+code: |
+  //get a reference to the canvas
+  var ctx = $('#canvas')[0].getContext("2d");
+  
+  //draw a circle
+  ctx.beginPath();
+  ctx.arc(75, 75, 10, 0, Math.PI*2, true); 
+  ctx.closePath();
+  ctx.fill();
+
+explain_before: |
+  The first thing we need to do is create an instance of the &lt;canvas&gt; element so that
+     we can start to draw on it. If you look in the source for this page, you'll see a 
+     declaration that looks like this:<br />
+     <pre>&lt;canvas id="canvas" width="300" height="300"&gt;&lt;/canvas&gt;</pre>
+     This declaration creates the canvas on which we'll draw in the rest of the tutorial.
+     <p>Now that we've got a canvas to draw on, let's do so:
+
+explain_after: |
+  You may want to comment out the <code>arc(...)</code> call and try
+      <code>ctx.rect(x, y, width, height)</code>.
+      <p>Make sure you keep the arc and rect calls in between calls to
+      <code>beginPath()</code> and <code>closePath()</code> just like the
+      sample call above. You may also try substituting <code>stroke()</code>
+      for <code>fill()</code>.
+
+name: 'ball'
+
+title: 'Draw a Circle'

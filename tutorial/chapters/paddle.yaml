@@ -1,0 +1,89 @@
+order: 6
+
+code: |
+  var paddlex;
+  var paddleh;
+  var paddlew;
+  
+  function init_paddle() {
+    paddlex = WIDTH / 2;
+    paddleh = 10;
+    paddlew = 75;
+  }
+  
+  function draw() {
+    clear();
+    circle(x, y, 10);
+    rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+   
+    if (x + dx > WIDTH || x + dx < 0)
+      dx = -dx;
+  
+    if (y + dy < 0)
+      dy = -dy;
+    else if (y + dy > HEIGHT) {
+      if (x > paddlex && x < paddlex + paddlew)
+        dy = -dy;
+      else
+        //game over, so stop the animation
+        clearInterval(intervalId);
+    }
+   
+    x += dx;
+    y += dy;
+  }
+  
+  init();
+  init_paddle();
+
+name: 'paddle'
+
+title: 'Add a Paddle'
+
+library: |
+  var x = 140;
+  var y = 150;
+  var dx = 2;
+  var dy = 4;
+  var ctx;
+  var WIDTH;
+  var HEIGHT;
+  var intervalId = 0;
+  
+  function circle(x,y,r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2, true);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  function rect(x,y,w,h) {
+    ctx.beginPath();
+    ctx.rect(x,y,w,h);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  function clear() {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  }
+  
+  function init() {
+    ctx = $('#canvas')[0].getContext("2d");
+    WIDTH = $("#canvas").width()
+    HEIGHT = $("#canvas").height()
+    intervalId = setInterval(draw, 10);
+    return intervalId;
+  }
+
+explain_before: |
+  Now we can start to think about making our game
+    a bit like an actual game. Let's add a paddle, and only allow the
+    ball to bounce off the bottom when it hits it.
+
+explain_after: |
+  You probably want to be able to move the paddle - we'll cover that in
+      the next page.
+      <p>
+      The constants paddlex, paddleh, and paddlew will be moved to the regular init()
+      function from now on.

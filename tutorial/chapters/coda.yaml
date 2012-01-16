@@ -1,0 +1,34 @@
+order: 11
+
+explain_before: |
+  That's it, Thanks for reading this far! The code presented
+  here is cribbed mostly from a <a
+  href="http://billmill.org/static/refresh-canvas/presentation/index-osf.html">presentation</a>
+  I gave to <a href="http://refreshbmore.org/">Refresh Baltimore</a> in August, 2008.
+  
+  Some resources you may find helpful if you study canvas more:
+  <ul><li>Mozilla's <a href="https://developer.mozilla.org/en/Drawing_Graphics_with_Canvas">
+  canvas tutorial</a> is excellent, and much more comprehensive than this one.
+  <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#the-canvas-element">The
+  Spec</a>. Since it's currently in development, these features may or may not be
+  available in current browsers.
+  <li><a href="http://getfirebug.com/">Firebug</a> is an essential tool for any javascript
+  developer.
+  </ul>
+  
+  <p>Innumerable thanks to <a 
+  href="http://marijn.haverbeke.nl/codemirror/">codemirror</a> for the awesome 
+  text editor in use all over this tutorial, and to <a 
+  href="http://jquery.com/">jQuery</a> and <a href="http://ui.jquery.com/">jQuery 
+  UI</a> for making my life much easier.
+  
+  <p>You can find the code used to generate this tutorial (using the excellent <a
+  href="http://www.makotemplates.org/">mako</a> template library) on <a
+  href="http://github.com/llimllib/refresh-canvas/tree/master/tutorial">github</a>.
+  
+  <p>Feel free to <a href="mailto:bill.mill@gmail.com">drop me a line</a> if you have
+  any comments or questions, or <a href="http://billmill.org">visit my blog</a>.
+
+name: 'coda'
+
+title: 'Coda'
