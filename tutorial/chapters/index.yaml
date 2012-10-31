@@ -158,7 +158,7 @@ explain_before: |
   <p>In order to use this tutorial, you'll need to have a relatively recent version
   of <a href="http://mozilla.com/firefox">Firefox</a>, <a
   href="http://apple.com/safari">Safari</a>, or <a href="http://opera.com">Opera</a>.
-  You cannot use Internet Explorer, because Microsoft hss decided not to implement the
+  You cannot use Internet Explorer, because Microsoft has decided not to implement the
   &lt;canvas&gt; element in it.
   <p>Before you read any further, click on the "run code" button on the left to
   play the game that we'll end up creating.
