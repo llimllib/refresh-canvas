@@ -21,7 +21,7 @@ code: |
     drawbricks();
   
     //want to learn about real collision detection? go read
-    // http://www.harveycartel.org/metanet/tutorials/tutorialA.html
+    // http://www.metanetsoftware.com/technique/tutorialA.html
     rowheight = BRICKHEIGHT + PADDING;
     colwidth = BRICKWIDTH + PADDING;
     row = Math.floor(y/rowheight);
